@@ -16,6 +16,7 @@ void TIMER_0_PORT_init(void)
 {
 
 	gpio_set_pin_function(LED1, MUX_PC9B_TC2_TIOB7);
+	//gpio_set_pin_function(TCTESTPIN, MUX_PC9B_TC2_TIOB7);
 }
 
 void TIMER_0_CLOCK_init(void)
@@ -36,23 +37,23 @@ void system_init(void)
 
 	/* GPIO on PA23 */
 
-	gpio_set_pin_level(LED0,
+	//gpio_set_pin_level(LED0,
 	                   // <y> Initial level
 	                   // <id> pad_initial_level
 	                   // <false"> Low
 	                   // <true"> High
 	                   //true);
-					   false); //let's start with off by default
+	//				   false); //let's start with off by default
 					   
-	gpio_set_pin_level(TCTESTPIN, false);
+	gpio_set_pin_level(TCTESTPIN, true);
 
 	// Set pin direction to output
-	gpio_set_pin_direction(LED0, GPIO_DIRECTION_OUT);
+	//gpio_set_pin_direction(LED0, GPIO_DIRECTION_OUT);
 	
 	gpio_set_pin_direction(TCTESTPIN, GPIO_DIRECTION_OUT);
 	gpio_set_pin_function(TCTESTPIN, GPIO_PIN_FUNCTION_OFF);
 
-	gpio_set_pin_function(LED0, GPIO_PIN_FUNCTION_OFF);
+	//gpio_set_pin_function(LED0, GPIO_PIN_FUNCTION_OFF);
 	
 	// Set GPIO pins for channel inputs up
 	

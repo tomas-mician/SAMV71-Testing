@@ -15,7 +15,8 @@
 void TIMER_0_PORT_init(void)
 {
 
-	gpio_set_pin_function(LED1, MUX_PC9B_TC2_TIOB7);
+	//gpio_set_pin_function(LED1, MUX_PC9B_TC2_TIOB7);
+	gpio_set_pin_function(TC_OUT_TEST, MUX_PC30B_TC1_TIOB5); //GPIO(GPIO_PORTA, 6)
 }
 
 void TIMER_0_CLOCK_init(void)

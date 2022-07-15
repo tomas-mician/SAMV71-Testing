@@ -35,6 +35,7 @@
  */
 
 #include <atmel_start.h>
+#include <stdio.h>
 #include "tc_lite_driver_example_config.h"
 #include "tc_lite.h"
 #include "hal_gpio.h"
@@ -48,16 +49,27 @@ bool ch3_status = false;
 void channel_0_cb(uint32_t status)
 {
 	/* Toggle on board LED0 */
-	gpio_toggle_pin_level(LED0);
+	//gpio_toggle_pin_level(LED0);
 	gpio_toggle_pin_level(TCTESTPIN);
 }
 
 void update_channels_status(void)
 {
 	 ch0_status = gpio_get_pin_level(GPIO_IN_CH0);
+	 //printf("%s", ch0_status ? "true" : "false");
+	 
 	 ch1_status = gpio_get_pin_level(GPIO_IN_CH1);
 	 ch2_status = gpio_get_pin_level(GPIO_IN_CH2);
 	 ch3_status = gpio_get_pin_level(GPIO_IN_CH3);
+}
+
+void check_status(void)
+{
+	if (gpio_get_pin_level(GPIO_IN_CH0)) {
+		 //start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 1);
+		 gpio_toggle_pin_level(TCTESTPIN);
+		 //delay_ms(500);
+	}
 }
 
 int main(void)
@@ -66,7 +78,7 @@ int main(void)
 	atmel_start_init();
 
 	/* Register callback function for TC Channel 0 interrupt */
-	tc_register_callback(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 0, channel_0_cb); //why do we need this? 
+	tc_register_callback(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 0, channel_0_cb); //why do we need this? // this is for driving pin with TC in capture mode... 
 
 	/* Start TC channel 2 - configured in Waveform mode, generate PWM waveform and used as clock source to TC channel 0
 	 * and 1 */
@@ -77,15 +89,20 @@ int main(void)
 
 	/* Start TC channel 1 - configured in Waveform mode and generate PWM waveform on GPIO pin */
 	//start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 1);
+	
+	//check_status();
+	while(1) {
+		check_status();
+	}
 
-	while (1) {
+	while (0) {
 		update_channels_status(); // Check if any channel has detected something constantly 
 		// check status of each channel
 		// if status = true, start corresponding TC channel
 		// note: start = output just 1 pulse. don't need periodic or continuous output
-		if (ch0_status == true) {
+		if (ch0_status) {
 			start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 1);
-			delay_ms(500);
+			//delay_ms(1000);
 			// set a delay? does it need one? 	
 		}
 		if (ch1_status) {
@@ -99,8 +116,8 @@ int main(void)
 		}
 		else {
 			stop_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 1); // maybe not the way to do it... 
-			gpio_toggle_pin_level(LED0);
-			gpio_toggle_pin_level(TCTESTPIN);
+			//gpio_toggle_pin_level(LED0);
+			//gpio_toggle_pin_level(TCTESTPIN);
 		}
 	}
 }

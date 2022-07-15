@@ -52,18 +52,17 @@ int main(void)
 	atmel_start_init();
 
 	/* Register callback function for TC Channel 0 interrupt */
-	tc_register_callback(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 0, channel_0_cb);
+	//tc_register_callback(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 0, channel_0_cb);
 
 	/* Start TC channel 2 - configured in Waveform mode, generate PWM waveform and used as clock source to TC channel 0
 	 * and 1 */
 	start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 2);
 
 	/* Start TC channel 0 - configured in Capture mode and generate periodic interrupt */
-	start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 0);
+	//start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 0);
 
 	/* Start TC channel 1 - configured in Waveform mode and generete PWM waveform on GPIO pin */
 	start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 1);
-
 	while (1) {
 	}
 }
