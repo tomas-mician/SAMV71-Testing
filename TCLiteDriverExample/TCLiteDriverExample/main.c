@@ -56,13 +56,17 @@ int main(void)
 
 	/* Start TC channel 2 - configured in Waveform mode, generate PWM waveform and used as clock source to TC channel 0
 	 * and 1 */
-	start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 2);
+	start_timer(TC2, 2);
+	start_timer(TC1, 0);
 
 	/* Start TC channel 0 - configured in Capture mode and generate periodic interrupt */
 	//start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 0);
 
 	/* Start TC channel 1 - configured in Waveform mode and generete PWM waveform on GPIO pin */
-	start_timer(TC_LITE_DRIVER_EXAMPLE_INSTANCE, 1);
+	start_timer(TC2, 1);
+	start_timer(TC1, 2);
+	// MUX_PC30B_TC1_TIOB5 --> TC1, try channel 2
+	//start_timer(TC1, 2);
 	while (1) {
 	}
 }

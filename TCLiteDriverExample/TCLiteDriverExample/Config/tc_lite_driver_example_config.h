@@ -47,7 +47,7 @@
 // <i> Select TC instance for this example. Note: TC2 and TC3 instance is not valid for SAMG devices
 // <id> tc_lite_driver_example_instance
 #ifndef TC_LITE_DRIVER_EXAMPLE_INSTANCE
-#define TC_LITE_DRIVER_EXAMPLE_INSTANCE TC2
+#define TC_LITE_DRIVER_EXAMPLE_INSTANCE TC1 //TC2
 #endif
 
 // </h>

@@ -15,8 +15,9 @@
 void TIMER_0_PORT_init(void)
 {
 
-	//gpio_set_pin_function(LED1, MUX_PC9B_TC2_TIOB7);
-	gpio_set_pin_function(TC_OUT_TEST, MUX_PC30B_TC1_TIOB5); //GPIO(GPIO_PORTA, 6)
+	gpio_set_pin_function(LED1_1, MUX_PC9B_TC2_TIOB7);
+	gpio_set_pin_function(LED1, MUX_PC30B_TC1_TIOB5); /**< TC1 signal line function value: TIOB5 */
+	//gpio_set_pin_function(TC_OUT_TEST, MUX_PC30B_TC1_TIOB5); //GPIO(GPIO_PORTA, 6)
 }
 
 void TIMER_0_CLOCK_init(void)
@@ -24,6 +25,9 @@ void TIMER_0_CLOCK_init(void)
 	_pmc_enable_periph_clock(ID_TC2_CHANNEL0);
 	_pmc_enable_periph_clock(ID_TC2_CHANNEL1);
 	_pmc_enable_periph_clock(ID_TC2_CHANNEL2);
+	_pmc_enable_periph_clock(ID_TC1_CHANNEL0);
+	_pmc_enable_periph_clock(ID_TC1_CHANNEL1);
+	_pmc_enable_periph_clock(ID_TC1_CHANNEL2);
 }
 
 void system_init(void)
