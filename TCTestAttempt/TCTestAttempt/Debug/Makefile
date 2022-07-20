@@ -218,9 +218,7 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 
 LIB_DEP+= 
 
-LINKER_SCRIPT_DEP+=  \
-../Device_Startup/samv71q21b_flash.ld \
-../Device_Startup/samv71q21b_sram.ld
+LINKER_SCRIPT_DEP+= 
 
 
 # AVR32/GNU C Compiler

@@ -19,7 +19,7 @@ void EXTERNAL_IRQ_0_init(void)
 void TIMER_0_PORT_init(void)
 {
 	//gpio_set_pin_function(PA6_OUT, MUX_PC9B_TC2_TIOB7); // pin needs to match - 
-	gpio_set_pin_function(PA6_OUT, MUX_PC30B_TC1_TIOB5); // TIOB5 is on TC1 peripheral. Need to change stuff to match this
+	gpio_set_pin_function(PC30_OUT, MUX_PC30B_TC1_TIOB5); // TIOB5 is on TC1 peripheral. Need to change stuff to match this
 }
 
 void TIMER_0_CLOCK_init(void)
