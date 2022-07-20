@@ -18,7 +18,8 @@ void EXTERNAL_IRQ_0_init(void)
 
 void TIMER_0_PORT_init(void)
 {
-	gpio_set_pin_function(PA6_OUT, MUX_PC9B_TC2_TIOB7);
+	//gpio_set_pin_function(PA6_OUT, MUX_PC9B_TC2_TIOB7); // pin needs to match - 
+	gpio_set_pin_function(PA6_OUT, MUX_PC30B_TC1_TIOB5); // TIOB5 is on TC1 peripheral. Need to change stuff to match this
 }
 
 void TIMER_0_CLOCK_init(void)
@@ -64,9 +65,10 @@ void system_init(void)
 	
 	// TC channel 0: input - external trigger
 	// TC channel 1: we might not need this
-	// TC channel 2: output - generating PWM waveform
+	// TC channel 2: output - generating PWM waveform - 
+	// is it right to set direction here vs starting clock specifically? might be problem? 
 	gpio_set_pin_direction(PB3_TRIG, GPIO_DIRECTION_IN);
-	gpio_set_pin_direction(PA6_OUT, GPIO_DIRECTION_OUT);
+	//gpio_set_pin_direction(PA6_OUT, GPIO_DIRECTION_OUT);
 	
 
 	TIMER_0_CLOCK_init();

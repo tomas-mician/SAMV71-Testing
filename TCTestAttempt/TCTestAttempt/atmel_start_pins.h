@@ -22,7 +22,7 @@
 //#define PC9_OUT GPIO(GPIO_PORTC, 9) // TC ch2: output
 
 #define PB3_TRIG GPIO(GPIO_PORTB, 3) // TC ch0: external trigger
-#define PA6_OUT GPIO(GPIO_PORTA, 6) // TC ch2: output
+#define PA6_OUT GPIO(GPIO_PORTC, 30) // TC ch2: output
 
 
 #endif // ATMEL_START_PINS_H_INCLUDED
