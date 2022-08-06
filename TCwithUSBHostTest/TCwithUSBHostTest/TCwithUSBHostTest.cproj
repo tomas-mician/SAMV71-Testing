@@ -625,6 +625,12 @@
     <Compile Include="hpl\pmc\hpl_sleep.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="hpl\tc\tc_lite.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hpl\tc\tc_lite.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="hpl\usart\hpl_usart.c">
       <SubType>compile</SubType>
     </Compile>
@@ -838,6 +844,7 @@
     <Folder Include="hal\utils\src\" />
     <Folder Include="hpl\" />
     <Folder Include="hpl\core\" />
+    <Folder Include="hpl\tc" />
     <Folder Include="hpl\pio\" />
     <Folder Include="hpl\pmc\" />
     <Folder Include="hpl\usart\" />

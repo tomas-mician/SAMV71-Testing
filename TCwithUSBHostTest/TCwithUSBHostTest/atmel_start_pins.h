@@ -22,7 +22,7 @@
 #define EDBG_COM_TX GPIO(GPIO_PORTB, 4)
 
 // Pins for TC peripheral
-#define TC_TRIG(GPIO_PORTD, 22) // TIOBx
-#define TC_OUT(GPIO_PORTD, 21) // TIOAx
+#define TC_TRIG GPIO(GPIO_PORTD, 22) // TIOBx
+#define TC_OUT GPIO(GPIO_PORTD, 21) // TIOAx
 
 #endif // ATMEL_START_PINS_H_INCLUDED

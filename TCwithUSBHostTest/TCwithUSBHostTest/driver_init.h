@@ -10,6 +10,7 @@
 
 #include "atmel_start_pins.h"
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -25,6 +26,8 @@ extern "C" {
 
 #include <hal_usb_host.h>
 #include <hpl_usbhs_host.h>
+
+// #include <tc_lite.h>
 
 extern struct usart_sync_descriptor EDBG_COM;
 

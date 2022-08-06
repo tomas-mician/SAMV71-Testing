@@ -46,6 +46,8 @@ void channel_0_cb(uint32_t status)
 	gpio_toggle_pin_level(LED0);
 }
 
+
+
 int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
