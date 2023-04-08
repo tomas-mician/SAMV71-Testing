@@ -8890,7 +8890,7 @@ OUTPUT(ultraSerial.elf elf32-littlearm)
  .debug_line    0x00009a26     0x1328 hpl/uart/hpl_uart.o
  .debug_line    0x0000ad4e      0xdf2 main.o
 
-.debug_str      0x00000000   0x140391
+.debug_str      0x00000000   0x1403e5
  .debug_str     0x00000000   0x13a265 atmel_start.o
                              0x13ac0b (size before relaxing)
  .debug_str     0x0013a265      0x78d Device_Startup/startup_samv71q21b.o
@@ -8917,8 +8917,8 @@ OUTPUT(ultraSerial.elf elf32-littlearm)
                              0x13a7ee (size before relaxing)
  .debug_str     0x0013f374      0xf65 hpl/uart/hpl_uart.o
                              0x13c319 (size before relaxing)
- .debug_str     0x001402d9       0xb8 main.o
-                             0x13ad53 (size before relaxing)
+ .debug_str     0x001402d9      0x10c main.o
+                             0x13ad5f (size before relaxing)
 
 .debug_frame    0x00000000      0xcc0
  .debug_frame   0x00000000       0x28 atmel_start.o
