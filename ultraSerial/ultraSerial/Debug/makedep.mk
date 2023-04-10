@@ -46,7 +46,7 @@ hpl\pmc\hpl_sleep.c
 
 hpl\systick\hpl_systick_ARMv7_base.c
 
-hpl\uart\hpl_uart.c
+hpl\usart\hpl_usart.c
 
 hpl\xdmac\hpl_xdmac.c
 

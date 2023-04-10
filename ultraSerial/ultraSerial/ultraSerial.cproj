@@ -129,9 +129,9 @@
           <AcmeProjectActionInfo Action="File" Source="hri/hri_wdt_v71b.h" IsConfig="false" Hash="smIdSPuIDUy8nKYmXGIlGA" />
           <AcmeProjectActionInfo Action="File" Source="hri/hri_xdmac_v71b.h" IsConfig="false" Hash="0A2yMatWKCn1HiuGTRb8SQ" />
           <AcmeProjectActionInfo Action="File" Source="main.c" IsConfig="false" Hash="k0AH7j+BrmdFhBPzCCMptA" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="9U4lEfLZRXRH1veklgyllQ" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="uyZCvKvGiL/XXvCQVxVwCw" />
-          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="EdSNt5ppMPXPcgoOkUeUlA" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="/gsik0lbwDgrM50hCAgLRQ" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="pSbxRbK0mi+5QnoGa2LOkg" />
+          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="1wYL8AnpcgECHpreu0gqXw" />
           <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.h" IsConfig="false" Hash="XjVTFjJMRRNzEhdHQHId6Q" />
           <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.c" IsConfig="false" Hash="T3VOzbuaYYt9xv/tsko8Kw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_usart_async.h" IsConfig="false" Hash="km9RyrLcCSavva/oZ2rcOQ" />
@@ -150,16 +150,16 @@
           <AcmeProjectActionInfo Action="File" Source="hpl/pmc/hpl_pmc.h" IsConfig="false" Hash="YL7zMVyb12U7PUvwVS2yTQ" />
           <AcmeProjectActionInfo Action="File" Source="hpl/pmc/hpl_sleep.c" IsConfig="false" Hash="9+YuE98G6WFJNZZ9ZxtdaQ" />
           <AcmeProjectActionInfo Action="File" Source="hpl/systick/hpl_systick_ARMv7_base.c" IsConfig="false" Hash="w573zZDTlQcdeAwWbKogJw" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/uart/hpl_uart.c" IsConfig="false" Hash="752pDufzCmRoFPQJJm9KPg" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/uart/hpl_uart_base.h" IsConfig="false" Hash="4HEZG7XedIbksKXQjNiJSA" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/usart/hpl_usart.c" IsConfig="false" Hash="FVZ6mSJFBjfypkn/hTkRuw" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/usart/hpl_usart_base.h" IsConfig="false" Hash="snAQ6jxyUOQwZHI6xYZDIg" />
           <AcmeProjectActionInfo Action="File" Source="hpl/xdmac/hpl_xdmac.c" IsConfig="false" Hash="OuSCR23Cl7sDOyG/ZWMUrg" />
           <AcmeProjectActionInfo Action="File" Source="atmel_start.h" IsConfig="false" Hash="9RBG5E2ViQiSP2Gn4/FGpA" />
           <AcmeProjectActionInfo Action="File" Source="atmel_start.c" IsConfig="false" Hash="1RHIE7zTtYK4DURNPUqF9w" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_pmc_config.h" IsConfig="true" Hash="3XKiIx+uop95HFsqB+QIEA" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_systick_ARMv7_config.h" IsConfig="true" Hash="t3cQayNiIVFMCFQK142dew" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_uart_config.h" IsConfig="true" Hash="gixorJC6XBjMzaR7R3qruA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_usart_config.h" IsConfig="true" Hash="880KOvoY08lzBDUpbWPwbQ" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_xdmac_config.h" IsConfig="true" Hash="DDZ2H+b5anPm9+Iz2dR2AQ" />
-          <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="0Tu9Bl1mBjY04sxEjC/rmw" />
+          <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="/PoNKrgSIC9BXy9y4q0Jqg" />
         </AcmeActionInfos>
         <NonsecureFilesInfo />
       </AcmeProjectConfig>
@@ -218,7 +218,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -254,7 +254,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -272,7 +272,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -306,7 +306,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -343,7 +343,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -362,7 +362,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -388,7 +388,7 @@
     <Compile Include="Config\hpl_systick_ARMv7_config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Config\hpl_uart_config.h">
+    <Compile Include="Config\hpl_usart_config.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Config\hpl_xdmac_config.h">
@@ -577,10 +577,10 @@
     <Compile Include="hpl\systick\hpl_systick_ARMv7_base.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hpl\uart\hpl_uart.c">
+    <Compile Include="hpl\usart\hpl_usart.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hpl\uart\hpl_uart_base.h">
+    <Compile Include="hpl\usart\hpl_usart_base.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hpl\xdmac\hpl_xdmac.c">
@@ -723,7 +723,7 @@
     <Folder Include="hpl\pio\" />
     <Folder Include="hpl\pmc\" />
     <Folder Include="hpl\systick\" />
-    <Folder Include="hpl\uart\" />
+    <Folder Include="hpl\usart\" />
     <Folder Include="hpl\xdmac\" />
     <Folder Include="hri\" />
   </ItemGroup>

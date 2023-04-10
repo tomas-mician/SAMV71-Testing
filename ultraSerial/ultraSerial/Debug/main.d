@@ -139,9 +139,7 @@ main.d main.o: .././main.c ../atmel_start.h ../driver_init.h \
  ../hal/include/hal_usart_async.h ../hal/include/hal_io.h \
  ../hal/include/hpl_usart_async.h ../hal/include/hpl_usart.h \
  ../hal/include/hpl_irq.h ../hal/utils/include/utils_ringbuffer.h \
- ../hal/utils/include/compiler.h ../hal/utils/include/utils_assert.h \
- ../hpl/uart/hpl_uart_base.h ../hal/include/hpl_usart_sync.h \
- ../hal/include/hpl_usart.h
+ ../hal/utils/include/compiler.h ../hal/utils/include/utils_assert.h
 
 ../atmel_start.h:
 
@@ -504,9 +502,3 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b
 ../hal/utils/include/compiler.h:
 
 ../hal/utils/include/utils_assert.h:
-
-../hpl/uart/hpl_uart_base.h:
-
-../hal/include/hpl_usart_sync.h:
-
-../hal/include/hpl_usart.h:

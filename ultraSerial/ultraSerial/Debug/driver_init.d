@@ -140,9 +140,9 @@ driver_init.d driver_init.o: .././driver_init.c .././driver_init.h \
  ../hal/include/hpl_usart_async.h ../hal/include/hpl_usart.h \
  ../hal/include/hpl_irq.h ../hal/utils/include/utils_ringbuffer.h \
  ../hal/utils/include/compiler.h ../hal/utils/include/utils_assert.h \
- ../hpl/uart/hpl_uart_base.h ../hal/include/hpl_usart_sync.h \
- ../hal/include/hpl_usart.h ../hpl/pmc/hpl_pmc.h \
- ../Config/peripheral_clk_config.h ../hal/utils/include/utils.h
+ ../hpl/pmc/hpl_pmc.h ../Config/peripheral_clk_config.h \
+ ../hal/utils/include/utils.h ../hpl/usart/hpl_usart_base.h \
+ ../hal/include/hpl_usart_sync.h ../hal/include/hpl_usart.h
 
 .././driver_init.h:
 
@@ -504,14 +504,14 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b
 
 ../hal/utils/include/utils_assert.h:
 
-../hpl/uart/hpl_uart_base.h:
-
-../hal/include/hpl_usart_sync.h:
-
-../hal/include/hpl_usart.h:
-
 ../hpl/pmc/hpl_pmc.h:
 
 ../Config/peripheral_clk_config.h:
 
 ../hal/utils/include/utils.h:
+
+../hpl/usart/hpl_usart_base.h:
+
+../hal/include/hpl_usart_sync.h:
+
+../hal/include/hpl_usart.h:

@@ -11,6 +11,7 @@
 #include <hpl_pmc.h>
 #include <peripheral_clk_config.h>
 #include <utils.h>
+#include <hpl_usart_base.h>
 
 /*! The buffer size for USART */
 #define USART_0_BUFFER_SIZE 16
@@ -31,7 +32,7 @@ void delay_driver_init(void)
  */
 void USART_0_CLOCK_init()
 {
-	_pmc_enable_periph_clock(ID_UART2);
+	_pmc_enable_periph_clock(ID_USART1);
 }
 
 /**
@@ -42,9 +43,9 @@ void USART_0_CLOCK_init()
 void USART_0_PORT_init()
 {
 
-	gpio_set_pin_function(PD25, MUX_PD25C_UART2_URXD2);
+	gpio_set_pin_function(PA21, MUX_PA21A_USART1_RXD1);
 
-	gpio_set_pin_function(PD26, MUX_PD26C_UART2_UTXD2);
+	gpio_set_pin_function(PB4, MUX_PB4D_USART1_TXD1);
 }
 
 /**
@@ -55,8 +56,8 @@ void USART_0_PORT_init()
 void USART_0_init(void)
 {
 	USART_0_CLOCK_init();
-	usart_async_init(&USART_0, UART2, USART_0_buffer, USART_0_BUFFER_SIZE, _uart_get_usart_async());
 	USART_0_PORT_init();
+	usart_async_init(&USART_0, USART1, USART_0_buffer, USART_0_BUFFER_SIZE, _usart_get_usart_async());
 }
 
 void system_init(void)

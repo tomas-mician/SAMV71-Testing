@@ -21,7 +21,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -58,7 +58,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
@@ -77,7 +77,7 @@
       <Value>../hpl/pio</Value>
       <Value>../hpl/pmc</Value>
       <Value>../hpl/systick</Value>
-      <Value>../hpl/uart</Value>
+      <Value>../hpl/usart</Value>
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>

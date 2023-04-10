@@ -23,7 +23,6 @@ extern "C" {
 
 #include <hal_delay.h>
 #include <hal_usart_async.h>
-#include <hpl_uart_base.h>
 
 extern struct usart_async_descriptor USART_0;
 
@@ -32,7 +31,6 @@ void delay_driver_init(void);
 void USART_0_PORT_init(void);
 void USART_0_CLOCK_init(void);
 void USART_0_init(void);
-void USART_0_example(void);
 
 /**
  * \brief Perform system initialization, initialize pins and clocks for
