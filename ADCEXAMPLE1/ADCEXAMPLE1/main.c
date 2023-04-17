@@ -1,19 +1,6 @@
 #include <atmel_start.h>
 #include <stdio.h>
 
-
-int main(void)
-{
-	/* Initializes MCU, drivers and middleware */
-	atmel_start_init();
-
-	/* Replace with your application code */
-	while (1) {
-	}
-}
-#include <atmel_start.h>
-#include <stdio.h>
-
 // ADC Calculation Defs
 #define ADC_REF 3300
 #define ADC_COUNT 4095.0f
@@ -70,8 +57,7 @@ int main(void)
 	// Enable UART
 	struct io_descriptor *io;
 	usart_sync_get_io_descriptor(&TARGET_IO, &io);
-	usart_sync_enable(&TARGET_IO)
-
+	usart_sync_enable(&TARGET_IO);
 
 	/* Replace with your application code */
 	while (1) {

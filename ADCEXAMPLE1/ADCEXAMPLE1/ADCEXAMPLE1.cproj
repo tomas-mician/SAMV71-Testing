@@ -4,17 +4,17 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
-    <ProjectGuid>{84a34523-eddb-49b1-a64a-575b6b7fcb1b}</ProjectGuid>
-    <avrdevice>ATSAMV71Q21</avrdevice>
+    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <avrdevice>ATSAMV71Q21B</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>ADCEXAMPLE</AssemblyName>
-    <Name>ADCEXAMPLE</Name>
-    <RootNamespace>ADCEXAMPLE</RootNamespace>
+    <AssemblyName>ADCEXAMPLE1</AssemblyName>
+    <Name>ADCEXAMPLE1</Name>
+    <RootNamespace>ADCEXAMPLE1</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -30,15 +30,15 @@
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-        <options />
-        <configurations />
-        <files />
-        <documentation help="" />
-        <offline-documentation help="" />
-        <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.52.0" />
-        </dependencies>
-      </framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.52.0" />
+  </dependencies>
+</framework-data>
     </AsfFrameworkConfig>
     <Compiler>gcc</Compiler>
     <configurator>AtmelStart</configurator>
@@ -88,44 +88,45 @@
           <AcmeProjectActionInfo Action="File" Source="hal/utils/src/utils_list.c" IsConfig="false" Hash="rW6uwWgOnnMWzJjuYzxzZw" />
           <AcmeProjectActionInfo Action="File" Source="hal/utils/src/utils_ringbuffer.c" IsConfig="false" Hash="MBhQOsuapWaZGq/1E6lcTw" />
           <AcmeProjectActionInfo Action="File" Source="hal/utils/src/utils_syscalls.c" IsConfig="false" Hash="NaBnZufa6Sau3+tzlyR7Kw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_acc_v71.h" IsConfig="false" Hash="aDBbonoTtYaJOot059VEXg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_aes_v71.h" IsConfig="false" Hash="YStim5oE40JhwTNxxdz1Lg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_afec_v71.h" IsConfig="false" Hash="IcqUhw4f4zfxXZ7NoFAldQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_chipid_v71.h" IsConfig="false" Hash="MZGrRKPnShXvhn5vUJy4ng" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_dacc_v71.h" IsConfig="false" Hash="gAvpQWPdmKGscjyxK5GdlQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_efc_v71.h" IsConfig="false" Hash="l3J7l3DPaarKNu0hjqo5dQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_gmac_v71.h" IsConfig="false" Hash="RX/08YJQyLe/GvS6a/1P8g" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_gpbr_v71.h" IsConfig="false" Hash="J7j1w+vLcw01yVfuiLhl8Q" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_hsmci_v71.h" IsConfig="false" Hash="D07PsRRj8r59uvWwpAsSDw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_icm_v71.h" IsConfig="false" Hash="aaz2xfkU+Pw4XcqSnaxrGw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_isi_v71.h" IsConfig="false" Hash="x+XCPdlrQ6lIpaDCtnOC8A" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_lockbit_v71.h" IsConfig="false" Hash="HBwwGEhmxgopTzxLDjd5zA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_matrix_v71.h" IsConfig="false" Hash="Oh9Rd1ObsrQVd4RgLdAaNw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_mcan_v71.h" IsConfig="false" Hash="O3KXWpGjR3XFqWy+pAySZw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_mlb_v71.h" IsConfig="false" Hash="33ad0hFl7yaBm9LS4yCnqw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_pio_v71.h" IsConfig="false" Hash="oVp0BI4Ue9RGzk06+YvACA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_pmc_v71.h" IsConfig="false" Hash="MWsApuYKA374g2JjfmGfmQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_pwm_v71.h" IsConfig="false" Hash="6CJnf3pKg2GiU2FRb4LBjg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_qspi_v71.h" IsConfig="false" Hash="S7tVDvnUfQvmhEGHZtluNQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_rstc_v71.h" IsConfig="false" Hash="xclYaQC1GinieOmjdmPMYg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_rswdt_v71.h" IsConfig="false" Hash="qZ2gviApW/K1NJZTD4vOpg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_rtc_v71.h" IsConfig="false" Hash="Yb12RFwkeDSlc3Git3GYDQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_rtt_v71.h" IsConfig="false" Hash="RvMlxIO05KXWLP4YoJXOsQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_sdramc_v71.h" IsConfig="false" Hash="z8lnWBA3bnjvHF2cl7U/yg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_smc_v71.h" IsConfig="false" Hash="3wVVgoP3Ge3lixBHlmFrWQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_spi_v71.h" IsConfig="false" Hash="pmPh18F9neT24PyftCOwjA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_ssc_v71.h" IsConfig="false" Hash="F6h+nfZKbf58RC6wBMCXrQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_supc_v71.h" IsConfig="false" Hash="ZD1S4nNgXViGPOs2oF2bpQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_tc_v71.h" IsConfig="false" Hash="vk/oiOXwrXimlUZN095bKg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_trng_v71.h" IsConfig="false" Hash="FodijbFhzRT3hb44vzkIZg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_twihs_v71.h" IsConfig="false" Hash="BJz58lw+6y09eKAGQBFFNw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_uart_v71.h" IsConfig="false" Hash="gn5UX0FVVzFHSEPC7CHs+w" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_usart_v71.h" IsConfig="false" Hash="CRn+cOQwWQxSe0U9Vuid7g" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_usbhs_v71.h" IsConfig="false" Hash="xPt1nfNC7pN6eOR6fdobOg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_utmi_v71.h" IsConfig="false" Hash="fiW52A7yJ0AKwxwbXjr+Ng" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_v71.h" IsConfig="false" Hash="Wpd2Ywomzb4zA05Al6SgVQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_wdt_v71.h" IsConfig="false" Hash="gGS7x3woBsXm0Mm4S+qbaA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_xdmac_v71.h" IsConfig="false" Hash="yo9CiayZD3MaAB7elBKPkQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_acc_v71b.h" IsConfig="false" Hash="8i5E0TZzeGA3EuJWS3CdDA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_aes_v71b.h" IsConfig="false" Hash="4AE9CnZmVPnDOUiJfX62Vw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_afec_v71b.h" IsConfig="false" Hash="AbDNec01EcFty+7mUzFgnQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_chipid_v71b.h" IsConfig="false" Hash="M5OxJrTkpJMOPuyHhf1wHw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_dacc_v71b.h" IsConfig="false" Hash="va0hayWGK9BntcT+G46zSw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_efc_v71b.h" IsConfig="false" Hash="GQKlebXs25NG55yikwaAkQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_gmac_v71b.h" IsConfig="false" Hash="GmW+QUo7y/aAfDB6p886Kg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_gpbr_v71b.h" IsConfig="false" Hash="hnqw4hF37NVaht61My/piQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_hsmci_v71b.h" IsConfig="false" Hash="fCoRYTI5OzmO3a7nJzmwrw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_i2sc_v71b.h" IsConfig="false" Hash="fW+BEiWXpJ8JQGLdIsy9xw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_icm_v71b.h" IsConfig="false" Hash="e0B0pNzl93M0u9qGpUh8Jg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_isi_v71b.h" IsConfig="false" Hash="hjbqM7n1QyvFRNsC5hDXgA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_lockbit_v71b.h" IsConfig="false" Hash="NvQXwE3eIAMQArHP+WYN6w" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_matrix_v71b.h" IsConfig="false" Hash="Z8u1uLzqy7eLs8sl36dVvQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_mcan_v71b.h" IsConfig="false" Hash="7/mn4nNo1uxixq+i9cKcfA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_mlb_v71b.h" IsConfig="false" Hash="R5hg80JVNmU8HMs5vbMEiA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_pio_v71b.h" IsConfig="false" Hash="MjInk7B1R4F/kit/gsC59g" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_pmc_v71b.h" IsConfig="false" Hash="W4YGTRUk7ACaaFq3zI9hAw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_pwm_v71b.h" IsConfig="false" Hash="KP8QtgfCl9U52BPjUdLcOQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_qspi_v71b.h" IsConfig="false" Hash="Y2u/kTuV9diNALHTqHogLw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_rstc_v71b.h" IsConfig="false" Hash="EFc4nvhGDc4g0swig3/jbg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_rswdt_v71b.h" IsConfig="false" Hash="0uKPSY8VC0bi6vp+9wLU9A" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_rtc_v71b.h" IsConfig="false" Hash="Kd0nli1FLW3ela9RuE9p4w" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_rtt_v71b.h" IsConfig="false" Hash="onKRKPwDyJOdONqsLszCkw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_sdramc_v71b.h" IsConfig="false" Hash="oTB0H6UQFctlEd2P4NHDEg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_smc_v71b.h" IsConfig="false" Hash="rI18E4U8mEWdRUHfHND7bg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_spi_v71b.h" IsConfig="false" Hash="x3CTgv/9LtfZqRQeNVK5mQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_ssc_v71b.h" IsConfig="false" Hash="vMet/0ZbN47PbndW2rk2Wg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_supc_v71b.h" IsConfig="false" Hash="mNfHLQsPq1l6Jyro1ptjmA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_tc_v71b.h" IsConfig="false" Hash="V02iMGEtyIT69mb4P+/ZsQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_trng_v71b.h" IsConfig="false" Hash="RVMuibVNNb7doGcqIY+S+A" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_twihs_v71b.h" IsConfig="false" Hash="ihqMSOC0z5O+Plon0FtJIQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_uart_v71b.h" IsConfig="false" Hash="bfW7/DOFTumGPENVXJovow" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_usart_v71b.h" IsConfig="false" Hash="m2u7uUWCvJNkyFA3mzhBEw" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_usbhs_v71b.h" IsConfig="false" Hash="d7yT06bAdKKAkiszxPs1OA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_utmi_v71b.h" IsConfig="false" Hash="fUA7TLj5ktHmUxd+JGttrQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_v71b.h" IsConfig="false" Hash="nJusxvpdLqMzJZE5SpciqQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_wdt_v71b.h" IsConfig="false" Hash="smIdSPuIDUy8nKYmXGIlGA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_xdmac_v71b.h" IsConfig="false" Hash="0A2yMatWKCn1HiuGTRb8SQ" />
           <AcmeProjectActionInfo Action="File" Source="stdio_redirect/gcc/read.c" IsConfig="false" Hash="965gzdOr4sfKJQ4OpEJN/g" />
           <AcmeProjectActionInfo Action="File" Source="stdio_redirect/gcc/write.c" IsConfig="false" Hash="gCAVrSOZuCMZ84vNa/WFxA" />
           <AcmeProjectActionInfo Action="File" Source="stdio_redirect/iar/read.c" IsConfig="false" Hash="IpkgLxXTg/nDat19kCJ3gw" />
@@ -134,13 +135,13 @@
           <AcmeProjectActionInfo Action="File" Source="stdio_redirect/stdio_io.c" IsConfig="false" Hash="Nx8PfIAymK/f5AjLql/CyQ" />
           <AcmeProjectActionInfo Action="File" Source="stdio_redirect/stdio_io.h" IsConfig="false" Hash="4X02f8UL8cjBHeGJM3BnHw" />
           <AcmeProjectActionInfo Action="File" Source="main.c" IsConfig="false" Hash="k0AH7j+BrmdFhBPzCCMptA" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="0gXRb9gaXPwWafW8rtDVMg" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="PyPnK1gFo/rWLunmM6yy7A" />
-          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="1wYL8AnpcgECHpreu0gqXw" />
-          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.h" IsConfig="false" Hash="CBDaexa4Y4sxbNGarimn5Q" />
-          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.c" IsConfig="false" Hash="jV9CAUB5GoOMTji++R10FA" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="Abso+LQo3NlKa6JFX5Zpcg" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="lzYPzOyDhm74RVnuUE1sCA" />
+          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="wXzKlAfpEUkDskVD/oPLwQ" />
+          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.h" IsConfig="false" Hash="cH160fzQA03wS9SpBGuO7g" />
+          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.c" IsConfig="false" Hash="/c67jNPqoTLqPQCxos4oQw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_adc_sync.h" IsConfig="false" Hash="ez1X5T9kpYwT+1+5x4Pxqg" />
-          <AcmeProjectActionInfo Action="File" Source="hal/include/hal_usart_sync.h" IsConfig="false" Hash="ZzIGSRyjZuxRzFAtNNt7sw" />
+          <AcmeProjectActionInfo Action="File" Source="hal/include/hal_usart_os.h" IsConfig="false" Hash="Hq4yx06rnAoDPLwf6tuQNA" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_adc_async.h" IsConfig="false" Hash="kKbVmqgGDUkuWZYErBwgVA" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_adc_sync.h" IsConfig="false" Hash="dCWrizZn0RtcCM73jZ/k6A" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_missing_features.h" IsConfig="false" Hash="XsAvpgfutzkw0Y5SydYFaw" />
@@ -149,8 +150,8 @@
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_usart_dma.h" IsConfig="false" Hash="L6o/+UUpeZCCpOhnfMpCUQ" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_usart_sync.h" IsConfig="false" Hash="Yj+PoPxG2CqDOy5XoIWkwg" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_adc_sync.c" IsConfig="false" Hash="g0MT/8E9mrmMV9tMAyu/aQ" />
-          <AcmeProjectActionInfo Action="File" Source="hal/src/hal_usart_sync.c" IsConfig="false" Hash="VBVlAmBFEYTTUMHeIRFSxg" />
-          <AcmeProjectActionInfo Action="File" Source="hal/utils/include/parts.h" IsConfig="false" Hash="YS1xjXVYrxufM1BQ6ldrqw" />
+          <AcmeProjectActionInfo Action="File" Source="hal/src/hal_usart_os.c" IsConfig="false" Hash="0+Yg/b6vssNGhmRecjxhXw" />
+          <AcmeProjectActionInfo Action="File" Source="hal/utils/include/parts.h" IsConfig="false" Hash="DfksW1kzKrcCVZs6DY4GxA" />
           <AcmeProjectActionInfo Action="File" Source="hpl/afec/hpl_afec.c" IsConfig="false" Hash="dtAmnSF1FTMFQWs7Ond8Jg" />
           <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_core_m7_base.c" IsConfig="false" Hash="KIovO5rGBDN2wJ+OLfhqhQ" />
           <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_core_port.h" IsConfig="false" Hash="ljwhZNv8DEvc2OObQAX6ew" />
@@ -159,16 +160,16 @@
           <AcmeProjectActionInfo Action="File" Source="hpl/pmc/hpl_pmc.c" IsConfig="false" Hash="D1jo0afC4Fo8P/wc921cgw" />
           <AcmeProjectActionInfo Action="File" Source="hpl/pmc/hpl_pmc.h" IsConfig="false" Hash="YL7zMVyb12U7PUvwVS2yTQ" />
           <AcmeProjectActionInfo Action="File" Source="hpl/pmc/hpl_sleep.c" IsConfig="false" Hash="9+YuE98G6WFJNZZ9ZxtdaQ" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/usart/hpl_usart.c" IsConfig="false" Hash="KI+vbZd/zDkfPeBCkU19wA" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/usart/hpl_usart.c" IsConfig="false" Hash="FVZ6mSJFBjfypkn/hTkRuw" />
           <AcmeProjectActionInfo Action="File" Source="hpl/usart/hpl_usart_base.h" IsConfig="false" Hash="snAQ6jxyUOQwZHI6xYZDIg" />
           <AcmeProjectActionInfo Action="File" Source="hpl/xdmac/hpl_xdmac.c" IsConfig="false" Hash="OuSCR23Cl7sDOyG/ZWMUrg" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_start.c" IsConfig="false" Hash="WtwT7ld+0j4cPDj52v3y1A" />
+          <AcmeProjectActionInfo Action="File" Source="stdio_start.c" IsConfig="false" Hash="umFSfak5R5flVAbudB1ReQ" />
           <AcmeProjectActionInfo Action="File" Source="stdio_start.h" IsConfig="false" Hash="5j2k69zdoQpbzluEyr/rHQ" />
           <AcmeProjectActionInfo Action="File" Source="atmel_start.h" IsConfig="false" Hash="TNU9VszFRFbDuMJ3vToUzg" />
           <AcmeProjectActionInfo Action="File" Source="atmel_start.c" IsConfig="false" Hash="lom1/YOY9m/TDACgnyb3yA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_afec_config.h" IsConfig="true" Hash="atiw8+8rqE2zUk/gwFJioA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_afec_config.h" IsConfig="true" Hash="5bvTkgHxMWJ1t3kjGMbWRQ" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_pmc_config.h" IsConfig="true" Hash="3XKiIx+uop95HFsqB+QIEA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_usart_config.h" IsConfig="true" Hash="h57knzcsiIvFC9/AZCo7LQ" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_usart_config.h" IsConfig="true" Hash="880KOvoY08lzBDUpbWPwbQ" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_xdmac_config.h" IsConfig="true" Hash="DDZ2H+b5anPm9+Iz2dR2AQ" />
           <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="leQhkPS4ZuPPY9mggTHnGQ" />
           <AcmeProjectActionInfo Action="File" Source="config/stdio_redirect_config.h" IsConfig="true" Hash="CKmkBk12sfr7mb+HRQBuzg" />
@@ -176,19 +177,22 @@
         <NonsecureFilesInfo />
       </AcmeProjectConfig>
     </AcmeProjectConfig>
-    <avrtool>custom</avrtool>
-    <avrtoolserialnumber />
+    <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
+    <avrtoolserialnumber>ATML2407141800004712</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0xA1220E00</avrdeviceexpectedsignature>
-    <custom>
-      <ToolOptions xmlns="">
+    <avrtoolinterface>SWD</avrtoolinterface>
+    <com_atmel_avrdbg_tool_edbg>
+      <ToolOptions>
         <InterfaceProperties>
+          <SwdClock>2000000</SwdClock>
         </InterfaceProperties>
+        <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
-      <ToolType xmlns="">custom</ToolType>
-      <ToolNumber xmlns="">
-      </ToolNumber>
-      <ToolName xmlns="">Custom Programming Tool</ToolName>
-    </custom>
+      <ToolType>com.atmel.avrdbg.tool.edbg</ToolType>
+      <ToolNumber>ATML2407141800004712</ToolNumber>
+      <ToolName>EDBG</ToolName>
+    </com_atmel_avrdbg_tool_edbg>
+    <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -219,7 +223,7 @@
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -238,7 +242,7 @@
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
-  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21b_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
@@ -255,7 +259,7 @@
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.IncludePaths>
@@ -274,7 +278,7 @@
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -309,7 +313,7 @@
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize debugging experience (-Og)</armgcc.compiler.optimization.level>
@@ -329,7 +333,7 @@
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
-  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamv71q21b_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
@@ -346,7 +350,7 @@
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -366,7 +370,7 @@
       <Value>../hpl/xdmac</Value>
       <Value>../hri</Value>
       <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMV71_DFP\2.4.182\samv71b\include</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -404,10 +408,10 @@
     <Compile Include="Config\stdio_redirect_config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Device_Startup\startup_samv71q21.c">
+    <Compile Include="Device_Startup\startup_samv71q21b.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Device_Startup\system_samv71q21.c">
+    <Compile Include="Device_Startup\system_samv71q21b.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="driver_init.c">
@@ -443,7 +447,7 @@
     <Compile Include="hal\include\hal_sleep.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hal\include\hal_usart_sync.h">
+    <Compile Include="hal\include\hal_usart_os.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\include\hpl_adc_async.h">
@@ -515,7 +519,7 @@
     <Compile Include="hal\src\hal_sleep.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hal\src\hal_usart_sync.c">
+    <Compile Include="hal\src\hal_usart_os.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\utils\include\compiler.h">
@@ -599,118 +603,121 @@
     <Compile Include="hpl\xdmac\hpl_xdmac.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_acc_v71.h">
+    <Compile Include="hri\hri_acc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_aes_v71.h">
+    <Compile Include="hri\hri_aes_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_afec_v71.h">
+    <Compile Include="hri\hri_afec_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_chipid_v71.h">
+    <Compile Include="hri\hri_chipid_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_dacc_v71.h">
+    <Compile Include="hri\hri_dacc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_efc_v71.h">
+    <Compile Include="hri\hri_efc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_gmac_v71.h">
+    <Compile Include="hri\hri_gmac_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_gpbr_v71.h">
+    <Compile Include="hri\hri_gpbr_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_hsmci_v71.h">
+    <Compile Include="hri\hri_hsmci_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_icm_v71.h">
+    <Compile Include="hri\hri_i2sc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_isi_v71.h">
+    <Compile Include="hri\hri_icm_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_lockbit_v71.h">
+    <Compile Include="hri\hri_isi_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_matrix_v71.h">
+    <Compile Include="hri\hri_lockbit_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_mcan_v71.h">
+    <Compile Include="hri\hri_matrix_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_mlb_v71.h">
+    <Compile Include="hri\hri_mcan_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_pio_v71.h">
+    <Compile Include="hri\hri_mlb_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_pmc_v71.h">
+    <Compile Include="hri\hri_pio_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_pwm_v71.h">
+    <Compile Include="hri\hri_pmc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_qspi_v71.h">
+    <Compile Include="hri\hri_pwm_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_rstc_v71.h">
+    <Compile Include="hri\hri_qspi_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_rswdt_v71.h">
+    <Compile Include="hri\hri_rstc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_rtc_v71.h">
+    <Compile Include="hri\hri_rswdt_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_rtt_v71.h">
+    <Compile Include="hri\hri_rtc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_sdramc_v71.h">
+    <Compile Include="hri\hri_rtt_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_smc_v71.h">
+    <Compile Include="hri\hri_sdramc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_spi_v71.h">
+    <Compile Include="hri\hri_smc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_ssc_v71.h">
+    <Compile Include="hri\hri_spi_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_supc_v71.h">
+    <Compile Include="hri\hri_ssc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_tc_v71.h">
+    <Compile Include="hri\hri_supc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_trng_v71.h">
+    <Compile Include="hri\hri_tc_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_twihs_v71.h">
+    <Compile Include="hri\hri_trng_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_uart_v71.h">
+    <Compile Include="hri\hri_twihs_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_usart_v71.h">
+    <Compile Include="hri\hri_uart_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_usbhs_v71.h">
+    <Compile Include="hri\hri_usart_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_utmi_v71.h">
+    <Compile Include="hri\hri_usbhs_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_v71.h">
+    <Compile Include="hri\hri_utmi_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_wdt_v71.h">
+    <Compile Include="hri\hri_v71b.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_xdmac_v71.h">
+    <Compile Include="hri\hri_wdt_v71b.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hri\hri_xdmac_v71b.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -759,10 +766,10 @@
     <Folder Include="stdio_redirect\gcc\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Device_Startup\samv71q21_flash.ld">
+    <None Include="Device_Startup\samv71q21b_flash.ld">
       <SubType>compile</SubType>
     </None>
-    <None Include="Device_Startup\samv71q21_sram.ld">
+    <None Include="Device_Startup\samv71q21b_sram.ld">
       <SubType>compile</SubType>
     </None>
     <None Include="documentation\stdio.rst">
@@ -771,7 +778,7 @@
     <None Include="hal\documentation\adc_sync.rst">
       <SubType>compile</SubType>
     </None>
-    <None Include="hal\documentation\usart_sync.rst">
+    <None Include="hal\documentation\usart_os.rst">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>

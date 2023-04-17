@@ -65,90 +65,90 @@
 			<Description></Description>
 			<Files xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\include</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\include</AbsolutePath>
 					<Attribute></Attribute>
 					<Category>include</Category>
 					<Condition>C</Condition>
 					<FileContentHash i:nil="true" />
 					<FileVersion></FileVersion>
-					<Name>samv71/include</Name>
+					<Name>samv71b/include</Name>
 					<SelectString></SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\include\sam.h</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\include\sam.h</AbsolutePath>
 					<Attribute></Attribute>
 					<Category>header</Category>
 					<Condition>C</Condition>
-					<FileContentHash>ka+2rw+hBuYPPynK0qiguw==</FileContentHash>
+					<FileContentHash>8EGXjaBpIs09Q9+Wg18S4g==</FileContentHash>
 					<FileVersion></FileVersion>
-					<Name>samv71/include/sam.h</Name>
+					<Name>samv71b/include/sam.h</Name>
 					<SelectString></SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\templates\main.c</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\templates\main.c</AbsolutePath>
 					<Attribute>template</Attribute>
 					<Category>source</Category>
 					<Condition>C Exe</Condition>
-					<FileContentHash>udzFkL/Zi6oLa3srGdM/Hw==</FileContentHash>
+					<FileContentHash>xXPzXt0bSFwkPq0UO0owbg==</FileContentHash>
 					<FileVersion></FileVersion>
-					<Name>samv71/templates/main.c</Name>
+					<Name>samv71b/templates/main.c</Name>
 					<SelectString>Main file (.c)</SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\templates\main.cpp</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\templates\main.cpp</AbsolutePath>
 					<Attribute>template</Attribute>
 					<Category>source</Category>
 					<Condition>C Exe</Condition>
 					<FileContentHash>nU+WlKcYaWh0AWBBS+WVpA==</FileContentHash>
 					<FileVersion></FileVersion>
-					<Name>samv71/templates/main.cpp</Name>
+					<Name>samv71b/templates/main.cpp</Name>
 					<SelectString>Main file (.cpp)</SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\gcc\gcc\startup_samv71q21.c</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\gcc\gcc\startup_samv71q21b.c</AbsolutePath>
 					<Attribute>config</Attribute>
 					<Category>source</Category>
 					<Condition>GCC Exe</Condition>
-					<FileContentHash>guwYQa31hWohFcRHL2bSPw==</FileContentHash>
+					<FileContentHash>enF0j1M7SgaRe3pHpnxhEQ==</FileContentHash>
 					<FileVersion></FileVersion>
-					<Name>samv71/gcc/gcc/startup_samv71q21.c</Name>
+					<Name>samv71b/gcc/gcc/startup_samv71q21b.c</Name>
 					<SelectString></SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\gcc\system_samv71q21.c</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\gcc\system_samv71q21b.c</AbsolutePath>
 					<Attribute>config</Attribute>
 					<Category>source</Category>
 					<Condition>GCC Exe</Condition>
-					<FileContentHash>rm4DHEOGSW9RthEh4Df92Q==</FileContentHash>
+					<FileContentHash>PmP0Q3OqNSxX5gzGpZPfjw==</FileContentHash>
 					<FileVersion></FileVersion>
-					<Name>samv71/gcc/system_samv71q21.c</Name>
+					<Name>samv71b/gcc/system_samv71q21b.c</Name>
 					<SelectString></SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\gcc\gcc\samv71q21_flash.ld</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\gcc\gcc\samv71q21b_flash.ld</AbsolutePath>
 					<Attribute>config</Attribute>
 					<Category>linkerScript</Category>
 					<Condition>GCC Exe</Condition>
-					<FileContentHash>ot+IbPXqbampgRNSyHDypQ==</FileContentHash>
+					<FileContentHash>OJlWTVhRyApJ/OttuNiH3A==</FileContentHash>
 					<FileVersion></FileVersion>
-					<Name>samv71/gcc/gcc/samv71q21_flash.ld</Name>
+					<Name>samv71b/gcc/gcc/samv71q21b_flash.ld</Name>
 					<SelectString></SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
 				<d4p1:anyType i:type="FileInfo">
-					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71\gcc\gcc\samv71q21_sram.ld</AbsolutePath>
+					<AbsolutePath>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMV71_DFP\2.4.182\samv71b\gcc\gcc\samv71q21b_sram.ld</AbsolutePath>
 					<Attribute>config</Attribute>
 					<Category>other</Category>
 					<Condition>GCC Exe</Condition>
-					<FileContentHash>Y3tgsSPIMnvTes/9yErTsw==</FileContentHash>
+					<FileContentHash>ashvbcbxRnaowc65QjmH9g==</FileContentHash>
 					<FileVersion></FileVersion>
-					<Name>samv71/gcc/gcc/samv71q21_sram.ld</Name>
+					<Name>samv71b/gcc/gcc/samv71q21b_sram.ld</Name>
 					<SelectString></SelectString>
 					<SourcePath></SourcePath>
 				</d4p1:anyType>
@@ -157,12 +157,12 @@
 			<PackPath>C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/SAMV71_DFP/2.4.182/Atmel.SAMV71_DFP.pdsc</PackPath>
 			<PackVersion>2.4.182</PackVersion>
 			<PresentInProject>true</PresentInProject>
-			<ReferenceConditionId>ATSAMV71Q21</ReferenceConditionId>
+			<ReferenceConditionId>ATSAMV71Q21B</ReferenceConditionId>
 			<RteComponents xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
 				<d4p1:string></d4p1:string>
 			</RteComponents>
 			<Status>Resolved</Status>
-			<VersionMode>Latest</VersionMode>
+			<VersionMode>Fixed</VersionMode>
 			<IsComponentInAtProject>true</IsComponentInAtProject>
 		</ProjectComponent>
 	</ProjectComponents>
