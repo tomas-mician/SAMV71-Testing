@@ -30,7 +30,7 @@ hal\src\hal_spi_m_sync.c
 
 hal\src\hal_timer.c
 
-hal\src\hal_usart_sync.c
+hal\src\hal_usart_async.c
 
 hal\utils\src\utils_assert.c
 
@@ -56,7 +56,7 @@ hpl\tc\hpl_tc.c
 
 hpl\trng\hpl_trng.c
 
-hpl\uart\hpl_uart.c
+hpl\usart\hpl_usart.c
 
 hpl\xdmac\hpl_xdmac.c
 
