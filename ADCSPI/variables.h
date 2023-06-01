@@ -1,3 +1,6 @@
+#ifndef VARIABLES_H
+#define VARIABLES_H
+
 #define SAMPLING_FREQ 10
 #define STORED_DATA_TIME 100
 
@@ -5,3 +8,7 @@
 #define DATA_LENGTH SAMPLING_FREQ*STORED_DATA_TIME
 
 #define NUM_OF_DETECTOR 4
+
+
+
+#endif
