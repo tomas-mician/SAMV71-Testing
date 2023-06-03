@@ -170,6 +170,7 @@ void serial_send_data() {
 		serial_message[i+9] = get_from_buffer(i);
 	}
 	io_write(&USART_0.io, serial_message, MESSAGE_LENGTH);
+	io_write(&USART_0.io, '\n', 2);
 	memset(serial_message,0x00,MESSAGE_LENGTH);
 
 
@@ -180,6 +181,7 @@ int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
+
 	
 	// Set up Timer Function
 	task.interval = 1;
@@ -200,13 +202,15 @@ int main(void)
 	// Enable SPI
 	spi_m_sync_enable(&SPI_0);
 	
-	usart_async_register_callback(&USART_0, USART_ASYNC_TXC_CB, serial_tx_cb);
+	
+		usart_async_register_callback(&USART_0, USART_ASYNC_TXC_CB, serial_tx_cb);
 	int32_t result = usart_async_enable(&USART_0);
 	if (result == ERR_NONE) {
 		uint8_t startPrint [12] = "Serial ready";
 		io_write(&USART_0.io, startPrint, 12);
 		memset(startPrint,0x00,12);
 	}
+	
 
 	while (1) {
 		read_SPI_data();
