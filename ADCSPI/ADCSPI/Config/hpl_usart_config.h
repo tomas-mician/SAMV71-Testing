@@ -58,7 +58,7 @@
 // <i> USART baud rate setting
 // <id> usart_baud_rate
 #ifndef CONF_USART_1_BAUD
-#define CONF_USART_1_BAUD 115200
+#define CONF_USART_1_BAUD 9600
 #endif
 
 // </h>
@@ -189,18 +189,19 @@
 
 // </e>
 
-#define CONF_USART_1_MODE 0x1
+#define CONF_USART_1_MODE 0x0
 
-// Calculate BAUD register value in USRT mode
+// Calculate BAUD register value in UART mode
 #if CONF_USART1_CK_SRC < 3
 #ifndef CONF_USART_1_BAUD_CD
-#define CONF_USART_1_BAUD_CD ((CONF_USART1_FREQUENCY) / CONF_USART_1_BAUD)
+#define CONF_USART_1_BAUD_CD ((CONF_USART1_FREQUENCY) / CONF_USART_1_BAUD / 8 / (2 - CONF_USART_1_OVER))
 #endif
 #ifndef CONF_USART_1_BAUD_FP
-#define CONF_USART_1_BAUD_FP ((CONF_USART1_FREQUENCY)*8 / CONF_USART_1_BAUD - 8 * CONF_USART_1_BAUD_CD)
+#define CONF_USART_1_BAUD_FP                                                                                           \
+	((CONF_USART1_FREQUENCY) / CONF_USART_1_BAUD / (2 - CONF_USART_1_OVER) - 8 * CONF_USART_1_BAUD_CD)
 #endif
 #elif CONF_USART1_CK_SRC == 3
-/* No division is active. The value written in US_BRGR has no effect. */
+// No division is active. The value written in US_BRGR has no effect.
 #ifndef CONF_USART_1_BAUD_CD
 #define CONF_USART_1_BAUD_CD 1
 #endif

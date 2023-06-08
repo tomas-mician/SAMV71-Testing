@@ -240,7 +240,7 @@ drivers:
       domain_group: null
   USART_0:
     user_label: USART_0
-    definition: Atmel:SAMV71B_Drivers:0.0.1::ATSAMV71Q21B-AAB::USART1::driver_config_definition::USRT::HAL:Driver:USART.Async
+    definition: Atmel:SAMV71B_Drivers:0.0.1::ATSAMV71Q21B-AAB::USART1::driver_config_definition::UART::HAL:Driver:USART.Async
     functionality: USART
     api: HAL:Driver:USART_Async
     configuration:
@@ -250,7 +250,7 @@ drivers:
       usart_advanced: false
       usart_arch_fractional: 0
       usart_arch_msbf: LSB is transmitted first
-      usart_baud_rate: 115200
+      usart_baud_rate: 9600
       usart_channel_mode: Normal Mode
       usart_character_size: 8 bits
       usart_clock_output_select: The USART does not drive the SCK pin

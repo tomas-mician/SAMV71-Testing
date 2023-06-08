@@ -179,7 +179,7 @@
           <AcmeProjectActionInfo Action="File" Source="config/hpl_pmc_config.h" IsConfig="true" Hash="3XKiIx+uop95HFsqB+QIEA" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_spi_config.h" IsConfig="true" Hash="7v5QAN/oVyUHCS/OOcl5lw" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_tc_config.h" IsConfig="true" Hash="lmr7ORpfZzKn4S6TscRAdA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_usart_config.h" IsConfig="true" Hash="AJP/IBDSMOFWRgUk36OFNA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_usart_config.h" IsConfig="true" Hash="+X/A8R/RLMbwz46cIFy0AA" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_xdmac_config.h" IsConfig="true" Hash="DDZ2H+b5anPm9+Iz2dR2AQ" />
           <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="+JgiprOAiVY+atMw8nPFFQ" />
         </AcmeActionInfos>

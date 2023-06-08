@@ -7,13 +7,13 @@
 // 1 request for time
 // 2 send event-by-event
 
-volatile uint8_t data_mode = 0;
+volatile uint8_t data_mode = 1;
 
-
+#define MESSAGE_LENGTH 13
 
 #define MESSAGE_INTERVAL_MS 30
 
-#define MESSAGE_LENGTH 13
+
 
 // Struct for Timer Task
 static struct timer_task task;
@@ -148,31 +148,88 @@ static void serial_tx_cb(const struct usart_async_descriptor *const io_descr) {
 }
 
 void serial_send_data() {
-	uint8_t serial_message[MESSAGE_LENGTH] = { 0x00 };
 	
-	serial_message[0] = data_mode;
+	// TURN EVERYTHING INTO UINT16!!!!
+	//volatile uint8_t serial_message[MESSAGE_LENGTH+1];
 
-	// Extract milliseconds
-	serial_message[1] = (uint8_t)milliCounter; // Casts to 8 bit integer, only lower 8 bits are kept
-	serial_message[2] = (uint8_t)(milliCounter >> 8);  // Shift right by 8 bits and cast to uint8_t
-	serial_message[3] = (uint8_t)(milliCounter >> 16);  // Shift right by 16 bits and cast to uint8_t
-	serial_message[4] = (uint8_t)(milliCounter >> 24); // Shift right by 24 bits and cast to uint8_t
+	//uint8_t newline[] = "\n";
+	//memcpy(&serial_message[MESSAGE_LENGTH], newline, sizeof(newline));
 	
-	
-	
-	// Extract seconds
-	serial_message[5] = (uint8_t)secondCounter; // Casts to 8 bit integer, only lower 8 bits are kept
-	serial_message[6] = (uint8_t)(secondCounter >> 8);  // Shift right by 8 bits and cast to uint8_t
-	serial_message[7] = (uint8_t)(secondCounter >> 16);  // Shift right by 16 bits and cast to uint8_t
-	serial_message[8] = (uint8_t)(secondCounter >> 24); // Shift right by 24 bits and cast to uint8_t
-	
-	for (int i = 0; i < NUM_OF_DETECTOR; i++) {
-		serial_message[i+9] = get_from_buffer(i);
-	}
-	io_write(&USART_0.io, serial_message, MESSAGE_LENGTH);
-	io_write(&USART_0.io, '\n', 2);
-	memset(serial_message,0x00,MESSAGE_LENGTH);
+	//serial_message[0] = data_mode;
+//
 
+	
+	//// Extract milliseconds
+	//serial_message[1] = (uint8_t)milliCounter; // Casts to 8 bit integer, only lower 8 bits are kept
+	//serial_message[2] = (uint8_t)(milliCounter >> 8);  // Shift right by 8 bits and cast to uint8_t
+	//serial_message[3] = (uint8_t)(milliCounter >> 16);  // Shift right by 16 bits and cast to uint8_t
+	//serial_message[4] = (uint8_t)(milliCounter >> 24); // Shift right by 24 bits and cast to uint8_t
+	//
+	//
+	//
+	//// Extract seconds
+	//serial_message[5] = (uint8_t)secondCounter; // Casts to 8 bit integer, only lower 8 bits are kept
+	//serial_message[6] = (uint8_t)(secondCounter >> 8);  // Shift right by 8 bits and cast to uint8_t
+	//serial_message[7] = (uint8_t)(secondCounter >> 16);  // Shift right by 16 bits and cast to uint8_t
+	//serial_message[8] = (uint8_t)(secondCounter >> 24); // Shift right by 24 bits and cast to uint8_t
+	
+	//for (int i = 0; i < NUM_OF_DETECTOR; i++) {
+		//serial_message[i+9] = get_from_buffer(i);
+	//}
+	
+	
+	//uint8_t txbuffer [MESSAGE_LENGTH+1];
+	//memcpy(&txbuffer[0],&serial_message[0],MESSAGE_LENGTH+1);
+	
+	
+	//io_write(&USART_0.io, &data_mode, 1);
+	//io_write(&USART_0.io, &secondCounter, sizeof(secondCounter));
+	//io_write(&USART_0.io, &milliCounter, sizeof(milliCounter));
+	//for (int i = 0; i < NUM_OF_DETECTOR; i++) {
+		//uint8_t detector = get_from_buffer(i);
+		//io_write(&USART_0.io, &detector,1);
+		//memset(&detector,0x00,1);
+//
+	//}
+	
+	// create a buffer big enough to hold all the data
+uint8_t buffer[1 + sizeof(secondCounter) + sizeof(milliCounter) + NUM_OF_DETECTOR] = {0x00};
+//uint8_t buffer[5] = {0x00};
+int index = 0;
+volatile int result = 0;
+
+// add data_mode to the buffer
+
+buffer[index++] = data_mode;
+
+//// add secondCounter to the buffer
+//memcpy(&buffer[index], &secondCounter, sizeof(secondCounter));
+//index += sizeof(secondCounter);
+//
+//// add milliCounter to the buffer
+//memcpy(&buffer[index], &milliCounter, sizeof(milliCounter));
+//index += sizeof(milliCounter);
+
+// add detector data to the buffer
+for (int i = 0; i < NUM_OF_DETECTOR; i++) {
+	uint8_t detector = get_from_buffer(i);
+	buffer[index++] = detector;
+}
+
+// write the entire buffer
+result = io_write(&USART_0.io, &buffer, sizeof(buffer));
+
+memset(&buffer,0x00,sizeof(buffer));
+
+	
+// 	io_write(&USART_0.io, txbuffer, MESSAGE_LENGTH+1);
+// 	
+// 	//io_write(&USART_0.io, newline, sizeof(newline));
+// 	//io_write(&USART_0.io, '\n', 2);
+// 	memset(&serial_message,0x00,MESSAGE_LENGTH+1);
+// 	memset(&txbuffer,0x00,MESSAGE_LENGTH+1);
+	//memset(&newline,0x00,sizeof(newline));
+	
 
 }
 
@@ -207,8 +264,11 @@ int main(void)
 	int32_t result = usart_async_enable(&USART_0);
 	if (result == ERR_NONE) {
 		uint8_t startPrint [12] = "Serial ready";
+		uint8_t newline[] = "\n";
 		io_write(&USART_0.io, startPrint, 12);
+		io_write(&USART_0.io, newline, sizeof(newline));
 		memset(startPrint,0x00,12);
+		memset(newline,0x00,sizeof(newline));
 	}
 	
 
@@ -216,10 +276,51 @@ int main(void)
 		read_SPI_data();
 		
 		if (send_data_flag) {
-			serial_send_data();
+			
+			uint16_t startNum = 256;
+			uint16_t endNum = 300;
+			uint8_t buffer[2 + sizeof(startNum) + sizeof(secondCounter) + sizeof(milliCounter) + NUM_OF_DETECTOR + sizeof(endNum)] = {0x00};
+
+			int index = 0;
+			volatile int result = 0;
+			
+
+			// add startNum to the buffer
+			memcpy(&buffer[index], &startNum, sizeof(startNum));
+			index += sizeof(startNum);
+
+			// add data_mode to the buffer
+			buffer[index++] = data_mode;
+
+			// add secondCounter to the buffer
+			memcpy(&buffer[index], &secondCounter, sizeof(secondCounter));
+			index += sizeof(secondCounter);
+
+			// add milliCounter to the buffer
+			memcpy(&buffer[index], &milliCounter, sizeof(milliCounter));
+			index += sizeof(milliCounter);
+
+			// add detector data to the buffer
+			for (int i = 0; i < NUM_OF_DETECTOR; i++) {
+				uint8_t detector = get_from_buffer(i);
+				buffer[index++] = detector;
+			}
+
+
+
+			// add endNum to the buffer
+			memcpy(&buffer[index], &endNum, sizeof(endNum));
+			index += sizeof(endNum);
+
+			// write the entire buffer
+			result = io_write(&USART_0.io, &buffer, sizeof(buffer));
+
+			memset(&buffer,0x00,sizeof(buffer));
+
 			send_data_flag = 0;
-		}
+
 		
 	}
 }
+	}
 
