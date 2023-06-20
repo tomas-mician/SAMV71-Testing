@@ -1,6 +1,11 @@
 #include <atmel_start.h>
 //#include <asf.h>
 #include "variables.h"
+#include <stdint.h>
+#include "atca_basic.h"
+#include "atcac_base64.h"
+
+
 
 // Commands
 // 0 send bin
@@ -277,9 +282,8 @@ int main(void)
 		
 		if (send_data_flag) {
 			
-			uint16_t startNum = 256;
-			uint16_t endNum = 300;
-			uint8_t buffer[2 + sizeof(startNum) + sizeof(secondCounter) + sizeof(milliCounter) + NUM_OF_DETECTOR + sizeof(endNum)] = {0x00};
+			uint8_t startNum = "s";
+			uint8_t buffer[2 + sizeof(startNum) + sizeof(secondCounter) + sizeof(milliCounter) + NUM_OF_DETECTOR] = {0x00};
 
 			int index = 0;
 			volatile int result = 0;
@@ -308,12 +312,36 @@ int main(void)
 
 
 
-			// add endNum to the buffer
-			memcpy(&buffer[index], &endNum, sizeof(endNum));
-			index += sizeof(endNum);
+			//// add endNum to the buffer
+			//memcpy(&buffer[index], &endNum, sizeof(endNum));
+			//index += sizeof(endNum);
+			
+			size_t input_data_len = sizeof(buffer) / sizeof(uint8_t); // calculate size of your input data
+
+			// estimate size of the output buffer
+			size_t output_buffer_len = ((input_data_len + 2) / 3 * 4) + 1; // "+ 1" for null terminator
+
+			// allocate the output buffer
+			char* output_buffer = (char*)malloc(output_buffer_len);
+			if (output_buffer == NULL) {
+				// handle error
+			}
+
+			// encode the data
+
+			int ret = atcac_base64_encode(buffer, input_data_len, output_buffer, &output_buffer_len);
+			if (ret != ATCA_SUCCESS) {
+				// handle error
+			}
+
+			// now output_buffer contains the base64-encoded string and output_buffer_len is its actual length
 
 			// write the entire buffer
 			result = io_write(&USART_0.io, &buffer, sizeof(buffer));
+			
+			
+			// Don't forget to free the output buffer when you're done with it
+			free(output_buffer);
 
 			memset(&buffer,0x00,sizeof(buffer));
 
@@ -322,5 +350,65 @@ int main(void)
 		
 	}
 }
+
+
 	}
+	
+	
+
+
+
+// encoding
+static const char base64chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+void base64_encode(const uint8_t* data, uint16_t input_length, char* output, uint16_t output_length) {
+    uint8_t i;
+    uint8_t j = 0;
+    uint8_t temp[3];
+    uint8_t sextet;
+
+    for (i = 0; i < input_length; i++) {
+        // Take three bytes of input at a time
+        if ((i % 3) == 0) {
+            // If there is enough space in the output buffer
+            if ((j + 4) < output_length) {
+                // Start a new temp array
+                temp[0] = temp[1] = temp[2] = 0;
+            } else {
+                return; // Not enough space in output buffer
+            }
+        }
+        temp[i % 3] = data[i];
+        if ((i % 3) == 2) {
+            // Output the four encoded bytes
+            sextet = (temp[0] >> 2) & 0x3F;
+            output[j++] = base64chars[sextet];
+            sextet = ((temp[0] & 3) << 4) | ((temp[1] >> 4) & 0x0F);
+            output[j++] = base64chars[sextet];
+            sextet = ((temp[1] & 0x0F) << 2) | ((temp[2] >> 6) & 0x03);
+            output[j++] = base64chars[sextet];
+            sextet = temp[2] & 0x3F;
+            output[j++] = base64chars[sextet];
+        }
+    }
+
+    // Deal with the case where the input length is not divisible by 3
+    if ((i % 3) == 1) {
+        sextet = (temp[0] >> 2) & 0x3F;
+        output[j++] = base64chars[sextet];
+        sextet = ((temp[0] & 3) << 4);
+        output[j++] = base64chars[sextet];
+        output[j++] = '='; // Pad with equals signs
+        output[j++] = '=';
+    } else if ((i % 3) == 2) {
+        sextet = (temp[0] >> 2) & 0x3F;
+        output[j++] = base64chars[sextet];
+        sextet = ((temp[0] & 3) << 4) | ((temp[1] >> 4) & 0x0F);
+        output[j++] = base64chars[sextet];
+        sextet = ((temp[1] & 0x0F) << 2);
+        output[j++] = base64chars[sextet];
+        output[j++] = '=';
+    }
+    output[j] = '\0'; // Null-terminate the output string
+}
 

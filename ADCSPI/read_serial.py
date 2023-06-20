@@ -1,7 +1,19 @@
 import serial
+from serial.tools import list_ports
+
+
+# List available COM ports
+ports = list(list_ports.comports())
+for i, port in enumerate(ports):
+    print(f"{i+1}. {port}")
+
+# Ask the user to input the COM port number
+port_num = int(input("Please enter the number of the COM port you want to use: ")) - 1
+port = ports[port_num].device
 
 # Open serial port
-ser = serial.Serial('COM5', 9600)  # Change 'COM5' to your port name, 9600 to your baud rate
+ser = serial.Serial(port, 9600)  # Change 'COM5' to your port name, 9600 to your baud rate
+
 
 startNum = 256
 endNum = 300
@@ -44,4 +56,6 @@ while True:
         # If end number is received, print the values
         if int_value == endNum:
             print(f'Data Mode: {data_mode}, Second Counter: {secondCounter}, Milli Counter: {milliCounter}, Detectors: {detectors}')
+    else:
+        print(f'Received Num: {int_value}')
 
