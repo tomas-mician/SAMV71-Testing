@@ -94,8 +94,8 @@ void USART_0_example(void)
 	struct io_descriptor *io;
 
 	usart_async_register_callback(&USART_0, USART_ASYNC_TXC_CB, tx_cb_USART_0);
-	/*usart_async_register_callback(&USART_0, USART_ASYNC_RXC_CB, rx_cb);
-	usart_async_register_callback(&USART_0, USART_ASYNC_ERROR_CB, err_cb);*/
+	//usart_async_register_callback(&USART_0, USART_ASYNC_RXC_CB, rx_cb);
+	/*usart_async_register_callback(&USART_0, USART_ASYNC_ERROR_CB, err_cb);*/
 	usart_async_get_io_descriptor(&USART_0, &io);
 	usart_async_enable(&USART_0);
 
