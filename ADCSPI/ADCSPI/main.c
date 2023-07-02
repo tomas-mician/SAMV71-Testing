@@ -3,6 +3,7 @@
 #include "variables.h"
 #include <stdint.h>
 #include <string.h>
+#include "buffer_queue.h"
 
 
 
@@ -34,7 +35,7 @@ uint32_t secondCounter = 0;
 int calibrated_time_ms = 0;
 int time_datum = 0; 
 uint8_t startSend = 0;
-
+#define QUEUE_SIZE 60000
 
 // buffer for data passing down
 volatile uint8_t detector_data[NUM_OF_DETECTOR][DATA_LENGTH];
@@ -160,8 +161,11 @@ static void serial_rx_cb(const struct usart_async_descriptor *const io_descr, co
 		received_byte = 0;
 		
 		count = io_read(&USART_0.io, &received_byte, 1);
-		if (received_byte == STARTBYTE) {
+		if (received_byte == 'S' && QUEUE_SIZE > 0) {
+			// dequeue the buffer and write it
 			startSend = 1;
+			//if (result == 0) {
+			//}
 		}
 		
 	
@@ -215,38 +219,34 @@ int main(void)
 		
 		if (send_data_flag) {
 			
-			uint8_t buffer[1 + sizeof(secondCounter) + sizeof(milliCounter) + NUM_OF_DETECTOR] = {0x00};
+				BufferItem item;
 
-			int index = 0;
-			volatile int result = 0;
-			
+				// add data_mode to the buffer
+				item.buffer[0] = data_mode;
 
-			// add data_mode to the buffer
-			buffer[index++] = data_mode;
+				// add secondCounter to the buffer
+				memcpy(&item.buffer[1], &secondCounter, sizeof(secondCounter));
 
-			// add secondCounter to the buffer
-			memcpy(&buffer[index], &secondCounter, sizeof(secondCounter));
-			index += sizeof(secondCounter);
+				// add milliCounter to the buffer
+				memcpy(&item.buffer[1 + sizeof(secondCounter)], &milliCounter, sizeof(milliCounter));
 
-			// add milliCounter to the buffer
-			memcpy(&buffer[index], &milliCounter, sizeof(milliCounter));
-			index += sizeof(milliCounter);
+				// add detector data to the buffer
+				for (int i = 0; i < NUM_OF_DETECTOR; i++) {
+					uint8_t detector = get_from_buffer(i);
+					item.buffer[1 + sizeof(secondCounter) + sizeof(milliCounter) + i] = detector;
+				}
 
-			// add detector data to the buffer
-			for (int i = 0; i < NUM_OF_DETECTOR; i++) {
-				uint8_t detector = get_from_buffer(i);
-				buffer[index++] = detector;
-			}
-		
+				// enqueue the buffer
+	
+				enqueue(item);
+				
+				if (startSend == 1) {
+					BufferItem dequeueItem = dequeue();
+					int result = io_write(&USART_0.io, &dequeueItem.buffer, sizeof(dequeueItem.buffer));
+				}
 
-			// write the entire buffer
-			
-			if (startSend == 1) {
-				result = io_write(&USART_0.io, &buffer, sizeof(buffer));
-			}
-			
-			memset(&buffer, 0x00,sizeof(buffer));
-			send_data_flag = 0;
+				send_data_flag = 0;
+	
 			}
 
 		

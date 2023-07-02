@@ -62,7 +62,7 @@ i = i+ 1;
 j = 1;
 
 write(s, 'S', "uint8"); 
-% pause(1)
+pause(0)
 
 end
 

@@ -4,6 +4,8 @@
 
 atmel_start.c
 
+buffer_queue.c
+
 Device_Startup\startup_samv71q21b.c
 
 Device_Startup\system_samv71q21b.c

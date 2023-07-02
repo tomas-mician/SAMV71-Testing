@@ -404,6 +404,12 @@
     <Compile Include="atmel_start_pins.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="buffer_queue.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="buffer_queue.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Config\hpl_pmc_config.h">
       <SubType>compile</SubType>
     </Compile>
