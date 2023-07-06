@@ -17,7 +17,7 @@ volatile uint8_t data_mode = 1;
 
 #define MESSAGE_LENGTH 13
 
-#define MESSAGE_INTERVAL_MS 30
+volatile uint8_t message_interval_ms = 10;
 #define STARTBYTE 'S'
 
 
@@ -81,7 +81,7 @@ static void timer_task_cb(const struct timer_task *const timer_task)
 	messageCounter++;
 
 	// Check if it's time to send a message
-	if (messageCounter >= MESSAGE_INTERVAL_MS) {
+	if (messageCounter >= message_interval_ms) {
 		// Send serial message
 		send_data_flag = 1;
 		// Reset message counter
@@ -134,6 +134,7 @@ void add_to_buffer(uint8_t new_entry, uint8_t detector_id) {
 	if (end_index == start_index) {
 		start_index = (start_index + 1) % DATA_LENGTH;
 	}
+	return;
 }
 
 uint8_t get_from_buffer(uint8_t detector_id) {
@@ -157,15 +158,13 @@ static void serial_tx_cb(const struct usart_async_descriptor *const io_descr) {
 
 // When serial reads a data
 static void serial_rx_cb(const struct usart_async_descriptor *const io_descr, const uint16_t usart_data) {
-		uint8_t received_byte, count;
-		received_byte = 0;
+		uint8_t received_byte[2], count;
 		
-		count = io_read(&USART_0.io, &received_byte, 1);
-		if (received_byte == 'S' && QUEUE_SIZE > 0) {
-			// dequeue the buffer and write it
-			startSend = 1;
-			//if (result == 0) {
-			//}
+		count = io_read(&USART_0.io, &received_byte, 2); // now reading 2 bytes
+		
+		if (received_byte[0] == 'S' && QUEUE_SIZE > 0) {
+			startSend = 1;	
+			//message_interval_ms = received_byte[1]; // Update the message_interval_ms variable
 		}
 		
 	

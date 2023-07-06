@@ -2,6 +2,7 @@ function read_serial()
 % List available COM ports
 ports = serialportlist;
 num_ports = length(ports);
+sample_speed = 'K0';
 
 dataPoints = 7;
 
@@ -17,12 +18,16 @@ port_num = input('Please enter the number of the COM port you want to use: ');
 device = ports(port_num);
 
 
-baud_rate = 9600;
+baud_rate = 115200;
 s = serialport(device, baud_rate);
 
-% Write 'S' to the serial port
-write(s, 'S', "uint8");  % 'S' is cast to uint8 because write requires data in byte format
+% Clear input buffer
+flush(s);
 
+message = ['S',sample_speed]; 
+% Write 'S' to the serial port
+write(s, message, "uint8");  % 'S' is cast to uint8 because write requires data in byte format
+% write(s, sample_speed,"uint8");
 
 % At this point, data should be aligned
 
@@ -42,7 +47,7 @@ j = j + 1;
 
 % Read 2 bytes for miliseconds
 data = read(s,2,"uint8");
-int16data = uint32(data(1)) + bitshift(uint32(data(2)), 8);
+int16data = uint16(data(1)) + bitshift(uint16(data(2)), 8);
 dataArray(i,j) = int16data;
 j = j + 1;
 
@@ -61,7 +66,8 @@ fprintf('\n');
 i = i+ 1;
 j = 1;
 
-write(s, 'S', "uint8"); 
+write(s, message, "uint8"); 
+% write(s, sample_speed,"uint8");
 % pause(1)
 
 end

@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      00000059  00000000  00000000  00020132  2**0
                   CONTENTS, READONLY
-  7 .debug_info   00012cc6  00000000  00000000  0002018b  2**0
+  7 .debug_info   00012cd8  00000000  00000000  0002018b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00002cab  00000000  00000000  00032e51  2**0
+  8 .debug_abbrev 00002cab  00000000  00000000  00032e63  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    0000800f  00000000  00000000  00035afc  2**0
+  9 .debug_loc    0000800f  00000000  00000000  00035b0e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 00000a38  00000000  00000000  0003db0b  2**0
+ 10 .debug_aranges 00000a38  00000000  00000000  0003db1d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000009a8  00000000  00000000  0003e543  2**0
+ 11 .debug_ranges 000009a8  00000000  00000000  0003e555  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  0003de78  00000000  00000000  0003eeeb  2**0
+ 12 .debug_macro  0003de72  00000000  00000000  0003eefd  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00011fa2  00000000  00000000  0007cd63  2**0
+ 13 .debug_line   00011f9f  00000000  00000000  0007cd6f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00146055  00000000  00000000  0008ed05  2**0
+ 14 .debug_str    00146056  00000000  00000000  0008ed0e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  00001ab8  00000000  00000000  001d4d5c  2**2
+ 15 .debug_frame  00001ab8  00000000  00000000  001d4d64  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -3189,7 +3189,7 @@ static inline void hri_usart_write_US_CR_reg(const void *const hw, hri_usart_us_
   4012cc:	00401221 	.word	0x00401221
   4012d0:	55534100 	.word	0x55534100
   4012d4:	004019b0 	.word	0x004019b0
-  4012d8:	000403d0 	.word	0x000403d0
+  4012d8:	00030051 	.word	0x00030051
 
 004012dc <_usart_get_irq_num>:
 {
@@ -3618,7 +3618,7 @@ static void timer_task_cb(const struct timer_task *const timer_task)
 {
 	// Toggle LED
 	milliCounter++;
-  40159c:	490c      	ldr	r1, [pc, #48]	; (4015d0 <timer_task_cb+0x34>)
+  40159c:	490d      	ldr	r1, [pc, #52]	; (4015d4 <timer_task_cb+0x38>)
   40159e:	880b      	ldrh	r3, [r1, #0]
   4015a0:	3301      	adds	r3, #1
   4015a2:	b29b      	uxth	r3, r3
@@ -3630,85 +3630,85 @@ static void timer_task_cb(const struct timer_task *const timer_task)
   4015aa:	604a      	str	r2, [r1, #4]
 
 	// Check if it's time to send a message
-	if (messageCounter >= MESSAGE_INTERVAL_MS) {
-  4015ac:	2a1d      	cmp	r2, #29
-  4015ae:	d904      	bls.n	4015ba <timer_task_cb+0x1e>
+	if (messageCounter >= message_interval_ms) {
+  4015ac:	490a      	ldr	r1, [pc, #40]	; (4015d8 <timer_task_cb+0x3c>)
+  4015ae:	7809      	ldrb	r1, [r1, #0]
+  4015b0:	b2c9      	uxtb	r1, r1
+  4015b2:	428a      	cmp	r2, r1
+  4015b4:	d304      	bcc.n	4015c0 <timer_task_cb+0x24>
 		// Send serial message
 		send_data_flag = 1;
-  4015b0:	460a      	mov	r2, r1
-  4015b2:	2101      	movs	r1, #1
-  4015b4:	7211      	strb	r1, [r2, #8]
+  4015b6:	4a07      	ldr	r2, [pc, #28]	; (4015d4 <timer_task_cb+0x38>)
+  4015b8:	2101      	movs	r1, #1
+  4015ba:	7211      	strb	r1, [r2, #8]
 		// Reset message counter
 		messageCounter = 0;
-  4015b6:	2100      	movs	r1, #0
-  4015b8:	6051      	str	r1, [r2, #4]
+  4015bc:	2100      	movs	r1, #0
+  4015be:	6051      	str	r1, [r2, #4]
 	}
 
 	// Reset millisecond counter every second
 	if (milliCounter >= 1000) {
-  4015ba:	f5b3 7f7a 	cmp.w	r3, #1000	; 0x3e8
-  4015be:	d305      	bcc.n	4015cc <timer_task_cb+0x30>
+  4015c0:	f5b3 7f7a 	cmp.w	r3, #1000	; 0x3e8
+  4015c4:	d305      	bcc.n	4015d2 <timer_task_cb+0x36>
 		milliCounter = 0;
-  4015c0:	4b03      	ldr	r3, [pc, #12]	; (4015d0 <timer_task_cb+0x34>)
-  4015c2:	2200      	movs	r2, #0
-  4015c4:	801a      	strh	r2, [r3, #0]
+  4015c6:	4b03      	ldr	r3, [pc, #12]	; (4015d4 <timer_task_cb+0x38>)
+  4015c8:	2200      	movs	r2, #0
+  4015ca:	801a      	strh	r2, [r3, #0]
 		secondCounter++;
-  4015c6:	68da      	ldr	r2, [r3, #12]
-  4015c8:	3201      	adds	r2, #1
-  4015ca:	60da      	str	r2, [r3, #12]
-  4015cc:	4770      	bx	lr
-  4015ce:	bf00      	nop
-  4015d0:	20400140 	.word	0x20400140
+  4015cc:	68da      	ldr	r2, [r3, #12]
+  4015ce:	3201      	adds	r2, #1
+  4015d0:	60da      	str	r2, [r3, #12]
+  4015d2:	4770      	bx	lr
+  4015d4:	20400140 	.word	0x20400140
+  4015d8:	20400024 	.word	0x20400024
 
-004015d4 <serial_tx_cb>:
+004015dc <serial_tx_cb>:
 	return entry;
 }
 
 // USART functions
 // Virtual COM port transmit callback function
 static void serial_tx_cb(const struct usart_async_descriptor *const io_descr) {
-  4015d4:	4770      	bx	lr
+  4015dc:	4770      	bx	lr
 	...
 
-004015d8 <serial_rx_cb>:
+004015e0 <serial_rx_cb>:
 	// Do nothing so far
 }
 
 
 // When serial reads a data
 static void serial_rx_cb(const struct usart_async_descriptor *const io_descr, const uint16_t usart_data) {
-  4015d8:	b500      	push	{lr}
-  4015da:	b083      	sub	sp, #12
-		uint8_t received_byte, count;
-		received_byte = 0;
-  4015dc:	a902      	add	r1, sp, #8
-  4015de:	2300      	movs	r3, #0
-  4015e0:	f801 3d01 	strb.w	r3, [r1, #-1]!
+  4015e0:	b500      	push	{lr}
+  4015e2:	b083      	sub	sp, #12
+		uint8_t received_byte[2], count;
 		
-		count = io_read(&USART_0.io, &received_byte, 1);
-  4015e4:	2201      	movs	r2, #1
-  4015e6:	4807      	ldr	r0, [pc, #28]	; (401604 <serial_rx_cb+0x2c>)
-  4015e8:	4b07      	ldr	r3, [pc, #28]	; (401608 <serial_rx_cb+0x30>)
-  4015ea:	4798      	blx	r3
-		if (received_byte == 'S' && QUEUE_SIZE > 0) {
-  4015ec:	f89d 3007 	ldrb.w	r3, [sp, #7]
-  4015f0:	2b53      	cmp	r3, #83	; 0x53
-  4015f2:	d002      	beq.n	4015fa <serial_rx_cb+0x22>
-			//if (result == 0) {
-			//}
+		count = io_read(&USART_0.io, &received_byte, 2); // now reading 2 bytes
+  4015e4:	2202      	movs	r2, #2
+  4015e6:	a901      	add	r1, sp, #4
+  4015e8:	4806      	ldr	r0, [pc, #24]	; (401604 <serial_rx_cb+0x24>)
+  4015ea:	4b07      	ldr	r3, [pc, #28]	; (401608 <serial_rx_cb+0x28>)
+  4015ec:	4798      	blx	r3
+		
+		if (received_byte[0] == 'S' && QUEUE_SIZE > 0) {
+  4015ee:	f89d 3004 	ldrb.w	r3, [sp, #4]
+  4015f2:	2b53      	cmp	r3, #83	; 0x53
+  4015f4:	d002      	beq.n	4015fc <serial_rx_cb+0x1c>
+			startSend = 1;	
+			//message_interval_ms = received_byte[1]; // Update the message_interval_ms variable
 		}
 		
 	
 }
-  4015f4:	b003      	add	sp, #12
-  4015f6:	f85d fb04 	ldr.w	pc, [sp], #4
-			startSend = 1;
-  4015fa:	2201      	movs	r2, #1
-  4015fc:	4b03      	ldr	r3, [pc, #12]	; (40160c <serial_rx_cb+0x34>)
-  4015fe:	741a      	strb	r2, [r3, #16]
+  4015f6:	b003      	add	sp, #12
+  4015f8:	f85d fb04 	ldr.w	pc, [sp], #4
+			startSend = 1;	
+  4015fc:	2201      	movs	r2, #1
+  4015fe:	4b03      	ldr	r3, [pc, #12]	; (40160c <serial_rx_cb+0x2c>)
+  401600:	741a      	strb	r2, [r3, #16]
 }
-  401600:	e7f8      	b.n	4015f4 <serial_rx_cb+0x1c>
-  401602:	bf00      	nop
+  401602:	e7f8      	b.n	4015f6 <serial_rx_cb+0x16>
   401604:	204002d4 	.word	0x204002d4
   401608:	004005a5 	.word	0x004005a5
   40160c:	20400140 	.word	0x20400140
@@ -3754,7 +3754,7 @@ void add_to_buffer(uint8_t new_entry, uint8_t detector_id) {
   401660:	2264      	movs	r2, #100	; 0x64
   401662:	fb02 f303 	mul.w	r3, r2, r3
   401666:	61a3      	str	r3, [r4, #24]
-}
+	return;
   401668:	e7ed      	b.n	401646 <add_to_buffer+0x36>
   40166a:	bf00      	nop
   40166c:	20400140 	.word	0x20400140
@@ -3990,7 +3990,7 @@ int main(void)
   4017c8:	d0f9      	beq.n	4017be <main+0x8e>
 				item.buffer[0] = data_mode;
   4017ca:	4b1c      	ldr	r3, [pc, #112]	; (40183c <main+0x10c>)
-  4017cc:	781b      	ldrb	r3, [r3, #0]
+  4017cc:	785b      	ldrb	r3, [r3, #1]
   4017ce:	f88d 3000 	strb.w	r3, [sp]
 				memcpy(&item.buffer[1], &secondCounter, sizeof(secondCounter));
   4017d2:	4b0a      	ldr	r3, [pc, #40]	; (4017fc <main+0xcc>)
@@ -4024,9 +4024,9 @@ int main(void)
   401814:	204002bc 	.word	0x204002bc
   401818:	00400671 	.word	0x00400671
   40181c:	204002d4 	.word	0x204002d4
-  401820:	004015d5 	.word	0x004015d5
+  401820:	004015dd 	.word	0x004015dd
   401824:	00400b69 	.word	0x00400b69
-  401828:	004015d9 	.word	0x004015d9
+  401828:	004015e1 	.word	0x004015e1
   40182c:	00400b3d 	.word	0x00400b3d
   401830:	004016e5 	.word	0x004016e5
   401834:	00400279 	.word	0x00400279
@@ -4125,7 +4125,7 @@ int main(void)
   4019a8:	676e7274 0000632e                       trng.c..
 
 004019b0 <_usarts>:
-  4019b0:	00000001 001008c0 000403d0 682f2e2e     ............../h
+  4019b0:	00000001 001008c0 00030051 682f2e2e     ........Q...../h
   4019c0:	752f6c70 74726173 6c70682f 6173755f     pl/usart/hpl_usa
   4019d0:	632e7472 00000000 1f1e1d1c              rt.c........
 

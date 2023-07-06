@@ -27,7 +27,7 @@
 // <i> This defines the clock selection
 // <id> timer_prescaler
 #ifndef CONF_TC0_TCCLKS
-#define CONF_TC0_TCCLKS 0x1
+#define CONF_TC0_TCCLKS 0x3
 #endif
 
 // </e>
@@ -35,7 +35,7 @@
 // <o> Length of one timer tick in uS <0-4294967295>
 // <id> timer_tick
 #ifndef CONF_TC0_TIMER_RC_TICK
-#define CONF_TC0_TIMER_RC_TICK 1000
+#define CONF_TC0_TIMER_RC_TICK 1172
 #endif
 // </h>
 

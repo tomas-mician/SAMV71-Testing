@@ -58,7 +58,7 @@
 // <i> USART baud rate setting
 // <id> usart_baud_rate
 #ifndef CONF_USART_1_BAUD
-#define CONF_USART_1_BAUD 9600
+#define CONF_USART_1_BAUD 115200
 #endif
 
 // </h>

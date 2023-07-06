@@ -177,9 +177,9 @@
           <AcmeProjectActionInfo Action="File" Source="atmel_start.h" IsConfig="false" Hash="9RBG5E2ViQiSP2Gn4/FGpA" />
           <AcmeProjectActionInfo Action="File" Source="atmel_start.c" IsConfig="false" Hash="1RHIE7zTtYK4DURNPUqF9w" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_pmc_config.h" IsConfig="true" Hash="3XKiIx+uop95HFsqB+QIEA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_spi_config.h" IsConfig="true" Hash="7v5QAN/oVyUHCS/OOcl5lw" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_tc_config.h" IsConfig="true" Hash="lmr7ORpfZzKn4S6TscRAdA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_usart_config.h" IsConfig="true" Hash="+X/A8R/RLMbwz46cIFy0AA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_spi_config.h" IsConfig="true" Hash="nn9csxvJCGfgpg9jibiLtg" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_tc_config.h" IsConfig="true" Hash="9NQXqZGD7Pxk7JdFZflmvg" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_usart_config.h" IsConfig="true" Hash="hsu1EvYKazm+ZZJH/oKOrQ" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_xdmac_config.h" IsConfig="true" Hash="DDZ2H+b5anPm9+Iz2dR2AQ" />
           <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="+JgiprOAiVY+atMw8nPFFQ" />
         </AcmeActionInfos>

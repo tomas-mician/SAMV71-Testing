@@ -173,7 +173,7 @@ drivers:
       spi_master_arch_cpha: Data is captured on the leading edge of SPCK and changed
         on the following edge of SPCK.
       spi_master_arch_cpol: The inactive state value of SPCK is logic level zero.
-      spi_master_baud_rate: 100000
+      spi_master_baud_rate: 115200
       spi_master_character_size: 8 bits
       spi_master_dlybct: 1000
       spi_master_dlybs: 1000
@@ -214,9 +214,9 @@ drivers:
       timer_fault_chan0_enable: false
       timer_fault_chan1_enable: false
       timer_fault_control: false
-      timer_prescaler: TIMER_CLOCK2 (MCK/8)
+      timer_prescaler: TIMER_CLOCK4 (MCK/128)
       timer_ra_tick: 500
-      timer_tick: 1000
+      timer_tick: 1172
     optional_signals: []
     variant: null
     clocks:
@@ -250,7 +250,7 @@ drivers:
       usart_advanced: false
       usart_arch_fractional: 0
       usart_arch_msbf: LSB is transmitted first
-      usart_baud_rate: 9600
+      usart_baud_rate: 115200
       usart_channel_mode: Normal Mode
       usart_character_size: 8 bits
       usart_clock_output_select: The USART does not drive the SCK pin

@@ -53,7 +53,7 @@
 // <i> The SPI data transfer rate. Note: (fspi_clock / baudrate) < 255
 // <id> spi_master_baud_rate
 #ifndef CONF_SPI_0_BAUD
-#define CONF_SPI_0_BAUD 100000
+#define CONF_SPI_0_BAUD 115200
 #endif
 
 // </h>
