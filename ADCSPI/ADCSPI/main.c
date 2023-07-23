@@ -355,7 +355,6 @@ int main(void)
 					{
 						BinBufferItem dequeueItemBin = bin_buffer_dequeue();
 						int result = io_write(&USART_0.io, (uint8_t *)&dequeueItemBin, sizeof(dequeueItemBin));
-						//memset(dequeueItem,{0x00},sizeof(dequeueItem));
 						break;
 					}
 					case 2:
