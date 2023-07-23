@@ -110,6 +110,8 @@ static struct tc_configuration _tcs[] = {
 
 static struct _timer_device *_tc0_dev = NULL;
 
+static struct _timer_device *_tc1_dev = NULL;
+
 static struct tc_configuration *get_cfg(void *hw)
 {
 	uint8_t i;
@@ -130,6 +132,9 @@ static void _tc_init_irq_param(const void *const hw, void *dev)
 {
 	if (hw == TC0) {
 		_tc0_dev = (struct _timer_device *)dev;
+	}
+	if (hw == TC1) {
+		_tc1_dev = (struct _timer_device *)dev;
 	}
 }
 
@@ -255,6 +260,14 @@ struct _timer_hpl_interface *_tc_get_timer(void)
 void TC0_Handler(void)
 {
 	tc_interrupt_handler(_tc0_dev);
+}
+
+/**
+ * \brief TC interrupt handler
+ */
+void TC3_Handler(void)
+{
+	tc_interrupt_handler(_tc1_dev);
 }
 
 /**

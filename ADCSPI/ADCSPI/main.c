@@ -9,23 +9,35 @@
 
 
 // Commands
-// 0 send bin
-// 1 request for time
+// 0 idle report
+// 1 send bin
 // 2 send event-by-event
+#define INITIAL_DATA_MODE 1
 
-volatile uint8_t data_mode = 1;
+volatile uint8_t data_mode = INITIAL_DATA_MODE;
+volatile uint8_t previous_data_mode = INITIAL_DATA_MODE;
 
-#define MESSAGE_LENGTH 13
+#define NUM_OF_BINS 16
+volatile uint32_t energy_bins[NUM_OF_DETECTOR][NUM_OF_BINS];
+
+#define EVENT_MESSAGE_LENGTH 13
+#define BIN_MESSAGE_LENGTH 7+NUM_OF_BINS*4
 
 volatile uint8_t message_interval_ms = 10;
 #define STARTBYTE 'S'
 
 
+// Add buffer queue for bin and event modes
+extern BinBufferQueue bin_buffer_queue;
+extern EventBufferQueue event_buffer_queue;
+
 
 // struct for Timer Task
 static struct timer_task task;
+static struct timer_task micro_task;
 uint16_t milliCounter = 0;
 uint32_t secondCounter = 0;
+uint16_t microCounter = 0;
 
 #define CS_PIN_DEVICE1 PIO_PA28_IDX // replace with your actual CS pins
 #define CS_PIN_DEVICE2 PIO_PA29_IDX
@@ -33,7 +45,7 @@ uint32_t secondCounter = 0;
 #define CS_PIN_DEVICE4 PIO_PA31_IDX
 
 int calibrated_time_ms = 0;
-int time_datum = 0; 
+int time_datum = 0;
 uint8_t startSend = 0;
 #define QUEUE_SIZE 60000
 
@@ -45,7 +57,7 @@ int end_index = 0;
 int start_index = 0;
 
 
-// Serial set up 
+// Serial set up
 // Serial receiving & Complete Flags
 volatile uint8_t serial_receiving = 0;
 volatile uint8_t serial_complete = 0;
@@ -58,21 +70,14 @@ uint32_t messageCounter = 0;
 volatile uint8_t serial_received_bytes_counter = 0;
 volatile uint8_t total_bytes = 0;
 
-// Size of receive buffer
-#define SERIAL_BUFFER_SIZE 200
-
-// Receive and transmit buffers
-volatile uint8_t rx_buffer[SERIAL_BUFFER_SIZE] = { 0x00 }; // make sure we don't have anything left in the memory
-volatile uint8_t tx_buffer[SERIAL_BUFFER_SIZE + 14] = "Your message: ";
-volatile uint8_t indicator_buffer[3] = "YES";
 
 
 
 
 /**
- * Callback for Timer Task
- *
- */
+* Callback for Timer Task
+*
+*/
 static void timer_task_cb(const struct timer_task *const timer_task)
 {
 	// Toggle LED
@@ -96,7 +101,24 @@ static void timer_task_cb(const struct timer_task *const timer_task)
 	
 }
 
+static void micro_timer_task_cb(const struct timer_task *const timer_task)
+{
+	microCounter++;
+	// Reset every millisecond
+	if (microCounter >= 1000) {
+		microCounter = 0;
+	}
+}
 
+
+void process_detector_data(uint8_t new_entry, uint8_t detector_index) {
+	// Assuming new_entry is the output of ADC (0 - 65535)
+	// Map this to one of your 16 bins
+	int bin_index = new_entry / (65536 / NUM_OF_BINS);
+	
+	// Increase the count for this bin
+	energy_bins[detector_index][bin_index]++;
+}
 
 
 // SPI functions
@@ -110,17 +132,19 @@ void read_SPI_data(void)
 
 	// List of CS pins for all devices
 	uint8_t cs_pins[4] = {CS_PIN_DEVICE1, CS_PIN_DEVICE2, CS_PIN_DEVICE3, CS_PIN_DEVICE4};
+	
+	
 
 	for (int i = 0; i < 4; i++) {
 		
 
 		gpio_set_pin_level(cs_pins[i], false); // set the pin low (select the device)
 		io_read(io, &read_data, 1); // Read 1 bytes of data
-		gpio_set_pin_level(cs_pins[i], true); // set the pin high (deselect the device)
+		gpio_set_pin_level(cs_pins[i], true); // set the pin high (de-select the device)
 		add_to_buffer(read_data, i);
 		
-
-		//data_device = (read_data[0]<<8) | read_data[1]; // Assume the data is in big-endian byte order
+		process_detector_data(read_data,i);
+		
 	}
 }
 
@@ -155,20 +179,43 @@ static void serial_tx_cb(const struct usart_async_descriptor *const io_descr) {
 	// Do nothing so far
 }
 
-
+#define WAITING_FOR_START 0
+#define WAITING_FOR_MODE 1
+static uint8_t receive_state = WAITING_FOR_START;
 // When serial reads a data
 static void serial_rx_cb(const struct usart_async_descriptor *const io_descr, const uint16_t usart_data) {
-		uint8_t received_byte[2], count;
-		
-		count = io_read(&USART_0.io, &received_byte, 2); // now reading 2 bytes
-		
-		if (received_byte[0] == 'S' && QUEUE_SIZE > 0) {
-			startSend = 1;	
-			//message_interval_ms = received_byte[1]; // Update the message_interval_ms variable
-		}
-		
+	uint8_t received_byte, count;
+	
+	count = io_read(&USART_0, &received_byte,1);
+
+    switch (receive_state) {
+        case WAITING_FOR_START:
+            if (received_byte == 'S') {
+                receive_state = WAITING_FOR_MODE;
+            }
+            break;
+        case WAITING_FOR_MODE:
+            data_mode = received_byte;
+            receive_state = WAITING_FOR_START;  // Ready to receive next message
+			startSend = 1;
+            break;
+    }
 	
 }
+
+void data_mode_check(uint8_t data_mode, uint8_t previous_data_mode) {
+	if (data_mode != previous_data_mode) {
+		if (data_mode == 2) {
+			// Enable microsecond timer
+			timer_start(&MICRO_Timer);
+			} else {
+			// Disable microsecond timer
+			timer_stop(&MICRO_Timer);
+		}
+		previous_data_mode = data_mode;  // Update the previous data mode
+	}
+}
+
 
 void serial_send_data() {
 }
@@ -188,6 +235,23 @@ int main(void)
 	// Add timer task
 	timer_add_task(&TIMER_0, &task);
 	timer_start(&TIMER_0);
+	
+	// Set up Microsecond Timer Function
+	micro_task.interval = 1;
+	micro_task.cb = micro_timer_task_cb;
+	micro_task.mode = TIMER_TASK_REPEAT;
+	
+	timer_add_task(&MICRO_Timer, &micro_task);
+	if (data_mode != previous_data_mode) {
+		if (data_mode == 2) {
+			// Enable microsecond timer
+			timer_start(&MICRO_Timer);
+			} else {
+			// Disable microsecond timer
+			timer_stop(&MICRO_Timer);
+		}
+		previous_data_mode = data_mode;  // Update the previous data mode
+	}
 
 
 	// Configure CS pins as output, initial state high
@@ -218,35 +282,96 @@ int main(void)
 		
 		if (send_data_flag) {
 			
-				BufferItem item;
-
-				// add data_mode to the buffer
-				item.buffer[0] = data_mode;
-
-				// add secondCounter to the buffer
-				memcpy(&item.buffer[1], &secondCounter, sizeof(secondCounter));
-
-				// add milliCounter to the buffer
-				memcpy(&item.buffer[1 + sizeof(secondCounter)], &milliCounter, sizeof(milliCounter));
-
-				// add detector data to the buffer
-				for (int i = 0; i < NUM_OF_DETECTOR; i++) {
-					uint8_t detector = get_from_buffer(i);
-					item.buffer[1 + sizeof(secondCounter) + sizeof(milliCounter) + i] = detector;
-				}
-
-				// enqueue the buffer
-	
-				enqueue(item);
+			switch (data_mode) {
+				case 0: // idle
 				
-				if (startSend == 1) {
-					BufferItem dequeueItem = dequeue();
-					int result = io_write(&USART_0.io, &dequeueItem.buffer, sizeof(dequeueItem.buffer));
-				}
+				break;
+				
+				case 1: // bin mode
+				{
+					BinBufferItem item;
+					item.mode = data_mode;
+					item.secondCounter = secondCounter;
+					item.milliCounter = milliCounter;
 
-				send_data_flag = 0;
-	
+					// Add bin data to the buffer
+					for (int i = 0; i < NUM_OF_DETECTOR; i++) {
+						for (int j = 0; j < NUM_OF_ENERGY_LEVELS; j++) {
+							item.data[i * NUM_OF_ENERGY_LEVELS + j] = energy_bins[i][j];
+						}
+					}
+					
+					// Reset the bins after sending data
+					memset(energy_bins, 0, NUM_OF_DETECTOR * NUM_OF_ENERGY_LEVELS * sizeof(uint8_t));
+					
+					// enqueue the buffer
+					bin_buffer_enqueue(item);
+					break;
+				}
+				
+				case 2: // event by event
+				{
+					EventBufferItem item;
+					item.mode = data_mode;
+					item.secondCounter = secondCounter;
+					item.milliCounter = milliCounter;
+					item.microCounter = microCounter;
+
+					// add detector data to the buffer
+					for (int i = 0; i < NUM_OF_DETECTOR; i++) {
+						item.data[i] = get_from_buffer(i);
+					}
+
+					// enqueue the buffer
+					event_buffer_enqueue(item);
+					break;
+				}
+				
+				default:
+				break;
+				
 			}
+
+
+			//uint8_t testSend = "ter";
+			//BinBufferItem dequeueItemBinToCopy = bin_buffer_dequeue();
+			//uint8_t dequeueItemBin[sizeof(dequeueItemBinToCopy)]; 
+			////fprintf(sizeof(uint32_t));
+			//memcpy(&dequeueItemBin,&dequeueItemBinToCopy,sizeof(dequeueItemBinToCopy));
+			//EventBufferItem dequeueItemEvent = event_buffer_dequeue();
+				////uint8_t dequeueItemEvent[sizeof(dequeueItemEventToCopy)]; 
+			////fprintf(sizeof(uint32_t));
+			////memcpy(&dequeueItemEvent,&dequeueItemEventToCopy,sizeof(dequeueItemEventToCopy));
+			////int result = io_write(&USART_0.io, (uint8_t *)&dequeueItemBin, sizeof(dequeueItemBin));
+			//int result = io_write(&USART_0.io, (uint8_t *)&dequeueItemEvent, sizeof(dequeueItemEvent));
+						
+			if (startSend == 1) {
+				switch (data_mode) {
+					
+					case 0:
+					break;
+					
+					case 1:
+					{
+						BinBufferItem dequeueItemBin = bin_buffer_dequeue();
+						int result = io_write(&USART_0.io, (uint8_t *)&dequeueItemBin, sizeof(dequeueItemBin));
+						//memset(dequeueItem,{0x00},sizeof(dequeueItem));
+						break;
+					}
+					case 2:
+					{
+						EventBufferItem dequeueItemEvent = event_buffer_dequeue();
+						int result = io_write(&USART_0.io, (uint8_t *)&dequeueItemEvent, sizeof(dequeueItemEvent));
+						break;
+					}
+					default:
+					break;
+				}
+			}
+			
+			send_data_flag = 0;
+			
+		}
 
 		
 	}

@@ -14,6 +14,8 @@
 #include <hpl_spi_base.h>
 #include <hpl_tc.h>
 
+#include <hpl_tc.h>
+
 #include <hpl_usart_base.h>
 
 /*! The buffer size for USART */
@@ -21,6 +23,7 @@
 
 struct spi_m_sync_descriptor  SPI_0;
 struct timer_descriptor       TIMER_0;
+struct timer_descriptor       MICRO_Timer;
 struct usart_async_descriptor USART_0;
 
 static uint8_t USART_0_buffer[USART_0_BUFFER_SIZE];
@@ -63,6 +66,21 @@ static void TIMER_0_init(void)
 	_pmc_enable_periph_clock(ID_TC0_CHANNEL0);
 	TIMER_0_PORT_init();
 	timer_init(&TIMER_0, TC0, _tc_get_timer());
+}
+
+void MICRO_Timer_PORT_init(void)
+{
+}
+/**
+ * \brief Timer initialization function
+ *
+ * Enables Timer peripheral, clocks and initializes Timer driver
+ */
+static void MICRO_Timer_init(void)
+{
+	_pmc_enable_periph_clock(ID_TC1_CHANNEL0);
+	MICRO_Timer_PORT_init();
+	timer_init(&MICRO_Timer, TC1, _tc_get_timer());
 }
 
 void RAND_0_CLOCK_init(void)
@@ -120,6 +138,7 @@ void system_init(void)
 
 	SPI_0_init();
 	TIMER_0_init();
+	MICRO_Timer_init();
 
 	RAND_0_init();
 	USART_0_init();

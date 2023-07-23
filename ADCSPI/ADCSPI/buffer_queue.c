@@ -1,31 +1,52 @@
 #include "buffer_queue.h"
 
-volatile BufferItem bufferQueue[BUFFER_QUEUE_SIZE];
-volatile uint16_t queueStart = 0;
-volatile uint16_t queueEnd = 0;
-volatile uint16_t queueSize = 0;
+BinBufferQueue bin_buffer_queue = {.head = 0, .tail = 0, .count = 0};
+EventBufferQueue event_buffer_queue = {.head = 0, .tail = 0, .count = 0};
 
-void enqueue(BufferItem item) {
-	if (queueSize >= BUFFER_QUEUE_SIZE) {
-		// If the queue is full, remove the oldest item
-		dequeue();
+void bin_buffer_enqueue(BinBufferItem item) {
+	if (bin_buffer_queue.count >= BIN_BUFFER_QUEUE_SIZE) {
+		// Bin buffer is full, can't enqueue
+		return;
 	}
-	// Then add the new item
-	bufferQueue[queueEnd] = item;
-	queueEnd = (queueEnd + 1) % BUFFER_QUEUE_SIZE;
-	queueSize++;
 
+	bin_buffer_queue.items[bin_buffer_queue.tail] = item;
+	bin_buffer_queue.tail = (bin_buffer_queue.tail + 1) % BIN_BUFFER_QUEUE_SIZE;
+	bin_buffer_queue.count++;
 }
 
-
-BufferItem dequeue() {
-	if (queueSize > 0) {
-		BufferItem item = bufferQueue[queueStart];
-		queueStart = (queueStart + 1) % BUFFER_QUEUE_SIZE;
-		queueSize--;
+BinBufferItem bin_buffer_dequeue() {
+	if (bin_buffer_queue.count > 0) {
+		BinBufferItem item = bin_buffer_queue.items[bin_buffer_queue.head];
+		bin_buffer_queue.head = (bin_buffer_queue.head + 1) % BIN_BUFFER_QUEUE_SIZE;
+		bin_buffer_queue.count--;
 		return item;
 	}
-	// else, return an empty item
-	BufferItem emptyItem = {{0x00}};
+
+	// If the queue is empty, return an item with zeros
+	BinBufferItem emptyItem = {.mode = 0, .secondCounter = 0, .milliCounter = 0, .data = {0}};
+	return emptyItem;
+}
+
+void event_buffer_enqueue(EventBufferItem item) {
+	if (event_buffer_queue.count >= EVENT_BUFFER_QUEUE_SIZE) {
+		// Event buffer is full, can't enqueue
+		return;
+	}
+
+	event_buffer_queue.items[event_buffer_queue.tail] = item;
+	event_buffer_queue.tail = (event_buffer_queue.tail + 1) % EVENT_BUFFER_QUEUE_SIZE;
+	event_buffer_queue.count++;
+}
+
+EventBufferItem event_buffer_dequeue() {
+	if (event_buffer_queue.count > 0) {
+		EventBufferItem item = event_buffer_queue.items[event_buffer_queue.head];
+		event_buffer_queue.head = (event_buffer_queue.head + 1) % EVENT_BUFFER_QUEUE_SIZE;
+		event_buffer_queue.count--;
+		return item;
+	}
+
+	// If the queue is empty, return an item with zeros
+	EventBufferItem emptyItem = {.mode = 0, .secondCounter = 0, .milliCounter = 0, .microCounter = 0, .data = {0}};
 	return emptyItem;
 }

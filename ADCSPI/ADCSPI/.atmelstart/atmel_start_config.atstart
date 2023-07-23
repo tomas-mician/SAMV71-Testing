@@ -228,6 +228,34 @@ drivers:
           external_frequency: 0
         configuration:
           tc_clock_source: Master Clock (MCK)
+  MICRO_Timer:
+    user_label: MICRO_Timer
+    definition: Atmel:SAMV71B_Drivers:0.0.1::ATSAMV71Q21B-AAB::TC1::driver_config_definition::Timer::HAL:Driver:Timer
+    functionality: Timer
+    api: HAL:Driver:Timer
+    configuration:
+      timer_abetrg: TIOB is used as an external trigger
+      timer_div_clock: true
+      timer_etrgedg: The clock is not gated by an external signal
+      timer_event_output_wave: false
+      timer_external_trigger_enable: false
+      timer_fault_chan0_enable: false
+      timer_fault_chan1_enable: false
+      timer_fault_control: false
+      timer_prescaler: TIMER_CLOCK4 (MCK/128)
+      timer_ra_tick: 500
+      timer_tick: 0
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: TC
+          input: Master Clock (MCK)
+          external: false
+          external_frequency: 0
+        configuration:
+          tc_clock_source: Master Clock (MCK)
   RAND_0:
     user_label: RAND_0
     definition: Atmel:SAMV71B_Drivers:0.0.1::ATSAMV71Q21B-AAB::TRNG::driver_config_definition::RAND::HAL:Driver:RAND.Sync

@@ -80,6 +80,22 @@
 #define CONF_TC0_FREQUENCY 150000000
 #endif
 
+// <y> TC Clock Source
+// <CONF_SRC_MCK"> Master Clock (MCK)
+// <id> tc_clock_source
+// <i> Select the clock source for TC.
+#ifndef CONF_TC1_SRC
+#define CONF_TC1_SRC CONF_SRC_MCK
+#endif
+
+/**
+ * \def CONF_TC1_FREQUENCY
+ * \brief TC1's Clock frequency
+ */
+#ifndef CONF_TC1_FREQUENCY
+#define CONF_TC1_FREQUENCY 150000000
+#endif
+
 // <h> USART Clock Settings
 // <o> USART Clock source
 

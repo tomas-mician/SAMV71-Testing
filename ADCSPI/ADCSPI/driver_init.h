@@ -23,12 +23,14 @@ extern "C" {
 
 #include <hal_spi_m_sync.h>
 #include <hal_timer.h>
+#include <hal_timer.h>
 
 #include <hal_rand_sync.h>
 #include <hal_usart_async.h>
 
 extern struct spi_m_sync_descriptor SPI_0;
 extern struct timer_descriptor      TIMER_0;
+extern struct timer_descriptor      MICRO_Timer;
 
 extern struct rand_sync_desc         RAND_0;
 extern struct usart_async_descriptor USART_0;

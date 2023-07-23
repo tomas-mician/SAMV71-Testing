@@ -20,6 +20,8 @@ void SPI_0_example(void);
 
 void TIMER_0_example(void);
 
+void MICRO_Timer_example(void);
+
 void RAND_0_example(void);
 
 void USART_0_example(void);
