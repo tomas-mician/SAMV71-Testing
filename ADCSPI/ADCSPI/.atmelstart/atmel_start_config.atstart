@@ -244,7 +244,7 @@ drivers:
       timer_fault_control: false
       timer_prescaler: TIMER_CLOCK4 (MCK/128)
       timer_ra_tick: 500
-      timer_tick: 0
+      timer_tick: 1
     optional_signals: []
     variant: null
     clocks:
