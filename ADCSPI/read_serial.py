@@ -1,71 +1,73 @@
 import serial
-import base64
+import time
 from serial.tools import list_ports
+def read_serial():
+    # List available COM ports
+    ports = list(list_ports.comports())
+    num_ports = len(ports)
 
+    # Ask the user to input the mode
+    mode = int(input('Please enter the mode you want to use (0 for idle, 1 for bin, 2 for event-by-event): '))
+    modeChar = mode.to_bytes(1, 'little')
 
-# List available COM ports
-ports = list(list_ports.comports())
-for i, port in enumerate(ports):
-    print(f"{i+1}. {port}")
+    if mode == 1:
+        count = 1+4+2+64+3+2-1
+    elif mode == 2:
+        count = 1+4+2+2+4+3-1
+    elif mode == 0:
+        count = 1+4+2+64+3
 
-# Ask the user to input the COM port number
-port_num = int(input("Please enter the number of the COM port you want to use: ")) - 1
-port = ports[port_num].device
+    for idx, port_info in enumerate(ports):
+        print(f"{idx+1}. {port_info.device}")
 
-# Open serial port
-ser = serial.Serial(port, 9600)  # Change 'COM5' to your port name, 9600 to your baud rate
+    # Ask the user to input the COM port number
+    port_num = int(input('Please enter the number of the COM port you want to use: ')) - 1
+    device = ports[port_num].device
 
+    baud_rate = 115200
+    s = serial.Serial(device, baud_rate)
 
-startByte = b'S'; 
-endByte = b'E';
+    # Clear input buffer
+    s.flushInput()
 
-# Byte order
-order = 'little'
+    message = b'S' + modeChar
+    s.write(message)
 
+    dataArray = []
+    i = 0
 
-data = b'\x00'
+    while True:  # repeat the loop
+        data = int.from_bytes(s.read(1), 'little')
 
+        while data != mode:
+            data = int.from_bytes(s.read(1), 'little')
 
-# Main loop to start and end reading data
-while True:
+        while s.in_waiting < count:
+            time.sleep(0.001)
 
-    # Read 1 bytes
-    data = ser.read(1)
+        data = s.read(count)
+        current_row = []
+        current_row.append(data[0])
 
-    if data == startByte:
-        print(data)
+        seconds = int.from_bytes(data[3:7], 'little')
+        milliseconds = int.from_bytes(data[7:9], 'little')
+        current_row.extend([seconds, milliseconds])
 
-        # Unpack byte to int
-        int_value = int.from_bytes(data, byteorder=order, signed=False)
+        if mode == 2:  # Event-by-event mode
+            microseconds = int.from_bytes(data[9:11], 'little')
+            current_row.append(microseconds)
+            for val in data[11:15]:
+                current_row.append(val)
+        else:  # Bin mode
+            for val in data[11:75]:
+                current_row.append(val)
 
-        # Check for start number
-        if int_value == startNum:
-            # Now read the data
+        print(', '.join(map(str, current_row)))
+        dataArray.append(current_row)
+        s.write(message)
 
-            # read 1 byte
-            data_mode = int.from_bytes(ser.read(1), byteorder=order, signed=False)
-            
-            # read 4 bytes
-            secondCounter = int.from_bytes(ser.read(4), byteorder=order, signed=False)
-            
-            # read 4 bytes
-            milliCounter = int.from_bytes(ser.read(4), byteorder=order, signed=False)
-            
-            # read 4 bytes for detector data
-            detectors = []
-            for i in range(4):
-                detector = int.from_bytes(ser.read(1), byteorder=order, signed=False)
-                detectors.append(detector)
+    s.close()
 
-
-            # Read the end number
-            data = ser.read(2)
-            int_value = int.from_bytes(data, byteorder=order, signed=False)
-            
-            # If end number is received, print the values
-            if int_value == endNum:
-                print(f'Data Mode: {data_mode}, Second Counter: {secondCounter}, Milli Counter: {milliCounter}, Detectors: {detectors}')
-        else:
-            print(f'Received Num: {int_value}')
-
-
+# Call the function if this script is run as the main module
+if __name__ == "__main__":
+    read_serial()
