@@ -16,6 +16,7 @@
 
 volatile uint8_t data_mode = INITIAL_DATA_MODE;
 volatile uint8_t previous_data_mode = INITIAL_DATA_MODE;
+int rt = 1;
 
 #define NUM_OF_BINS 16
 volatile uint32_t energy_bins[NUM_OF_DETECTOR][NUM_OF_BINS];
