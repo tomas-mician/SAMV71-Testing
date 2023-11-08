@@ -600,5 +600,12 @@ pads:
     mode: Peripheral IO
     user_label: PB4
     configuration: null
+  Humidity_CS:
+    name: PA6
+    definition: Atmel:SAMV71B_Drivers:0.0.1::ATSAMV71Q21B-AAB::pad::PA6
+    mode: Digital output
+    user_label: Humidity_CS
+    configuration:
+      pad_initial_level: High
 toolchain_options: []
 static_files: []
