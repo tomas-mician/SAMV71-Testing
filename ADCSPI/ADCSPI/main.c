@@ -4,9 +4,12 @@
 #include <stdint.h>
 #include <string.h>
 #include "buffer_queue.h"
+//#include "bme280_sensor.h"
+
+#include "bme280.h"
 
 
-
+struct bme280_dev bme280; // BME280 device structure
 
 // Commands
 // 0 idle report
@@ -40,7 +43,7 @@ uint16_t milliCounter = 0;
 uint32_t secondCounter = 0;
 uint16_t microCounter = 0;
 
-#define CS_PIN_DEVICE1 PIO_PA28_IDX // replace with your actual CS pins
+#define CS_PIN_DEVICE1 PIO_PA6 // replace with your actual CS pins
 #define CS_PIN_DEVICE2 PIO_PA29_IDX
 #define CS_PIN_DEVICE3 PIO_PA30_IDX
 #define CS_PIN_DEVICE4 PIO_PA31_IDX
@@ -64,6 +67,10 @@ volatile uint8_t serial_receiving = 0;
 volatile uint8_t serial_complete = 0;
 volatile uint8_t send_data_flag = 0;
 uint32_t messageCounter = 0;
+
+
+// Humidity sensor reading flag
+volatile bool read_bme280_flag = false;
 
 
 
@@ -98,7 +105,12 @@ static void timer_task_cb(const struct timer_task *const timer_task)
 	if (milliCounter >= 1000) {
 		milliCounter = 0;
 		secondCounter++;
+		
+
+		read_bme280_flag = true;
+
 	}
+	
 	
 }
 
@@ -226,7 +238,19 @@ int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
+	
+	 struct bme280_dev dev;
+	 struct bme280_data comp_data;
 
+ // BME280 sensor initialization
+ // Make sure to implement the user I2C or SPI read/write and delay functions
+ bme280.dev_id = BME280_I2C_ADDR_PRIM; // Or BME280_I2C_ADDR_SEC
+ bme280.intf = BME280_I2C_INTF;
+ bme280.read = user_i2c_read; // Replace with actual I2C read function
+ bme280.write = user_i2c_write; // Replace with actual I2C write function
+ bme280.delay_ms = user_delay_ms; // Replace with actual delay function
+
+ bme280_init(&bme280);
 	
 	// Set up Timer Function
 	task.interval = 1;
@@ -279,7 +303,37 @@ int main(void)
 	
 
 	while (1) {
+		
+		// Example of reading sensor data
+		// if (some_condition_to_read_sensor) {
+		// 	uint32_t temperature, pressure, humidity;
+		// 	bme280_read_data(&temperature, &pressure, &humidity);
+		 //	Use the sensor data as needed
+		}
+			
 		read_SPI_data();
+		
+		     if (read_bme280_flag) {
+
+
+			      
+
+			       // Read the sensor data
+			       int8_t rslt = bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
+			       if (rslt == BME280_OK) {
+				       // Format the sensor data into a string
+				       char sensor_data_string[64];
+				       sprintf(sensor_data_string,
+				       "Temp: %.2f C, Pressure: %.2f Pa, Humidity: %.2f %%\r\n",
+				       comp_data.temperature, comp_data.pressure, comp_data.humidity);
+
+				       // Send the string over UART
+				       io_write(&USART_0, sensor_data_string,sizeof(sensor_data_string));
+				       } 
+					   
+				   
+				    read_bme280_flag = false;
+		       }
 		
 		if (send_data_flag) {
 			

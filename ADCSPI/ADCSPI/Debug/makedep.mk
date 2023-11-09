@@ -4,7 +4,11 @@
 
 atmel_start.c
 
+bme280.c
+
 buffer_queue.c
+
+bme280_sensor.c
 
 Device_Startup\startup_samv71q21b.c
 
