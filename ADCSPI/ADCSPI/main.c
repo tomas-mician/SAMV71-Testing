@@ -12,8 +12,7 @@
 
 // SPI and GPIO configurations (adjust these according to your setup)
 #define SPI_MODULE     SPI_0
-#define CS_GPIO_PORT   P/114
-#define CS_GPIO_PIN   114
+
 
 struct bme280_dev bme280; // BME280 device structure
 
@@ -49,7 +48,7 @@ uint16_t milliCounter = 0;
 uint32_t secondCounter = 0;
 uint16_t microCounter = 0;
 
-#define CS_PIN_DEVICE1 PIO_PA6 // replace with your actual CS pins
+#define CS_PIN_DEVICE1 Humidity_CS // replace with your actual CS pins
 #define CS_PIN_DEVICE2 PIO_PA29_IDX
 #define CS_PIN_DEVICE3 PIO_PA30_IDX
 #define CS_PIN_DEVICE4 PIO_PA31_IDX

@@ -1,5 +1,5 @@
-The SPI Master Synchronous Driver
-=================================
+The SPI Master Asynchronous Driver
+==================================
 
 The serial peripheral interface (SPI) is a synchronous serial communication
 interface.
@@ -21,6 +21,8 @@ Features
   * Character size
   * Data order
 * Data transfer: transmission, reception and full-duplex
+* Notifications about transfer completion and errors via callbacks
+* Status information with busy state and transfer count
 
 Applications
 ------------
@@ -31,7 +33,7 @@ LCD controller, etc.
 Dependencies
 ------------
 
-SPI master capable hardware
+SPI master capable hardware, with interrupt on each character sent/received.
 
 Concurrency
 -----------
@@ -44,8 +46,10 @@ Limitations
 The slave select (SS) is not automatically inserted during read/write/transfer,
 user must use I/O to control the devices' SS.
 
+While read/write/transfer is in progress, the data buffer used must be kept
+unchanged.
+
 Known issues and workarounds
 ----------------------------
 
 N/A
-
