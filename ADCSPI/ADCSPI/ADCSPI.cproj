@@ -419,12 +419,6 @@
     <Compile Include="buffer_queue.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="bme280_sensor.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="bme280_sensor.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Config\hpl_pmc_config.h">
       <SubType>compile</SubType>
     </Compile>

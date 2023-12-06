@@ -7,7 +7,13 @@
 //#include "bme280_sensor.h"
 
 #include "bme280.h"
+//#include "SPI.h" // Replace with your SPI HAL header
+//#include "gpio.h" // Replace with your GPIO HAL header
 
+// SPI and GPIO configurations (adjust these according to your setup)
+#define SPI_MODULE     SPI_0
+#define CS_GPIO_PORT   P/114
+#define CS_GPIO_PIN   114
 
 struct bme280_dev bme280; // BME280 device structure
 
@@ -234,21 +240,90 @@ void serial_send_data() {
 }
 
 
+
+
+struct bme280_dev bme280;
+
+// SPI read and write functions
+int8_t spi_reg_write(uint8_t cs, uint8_t reg_addr, uint8_t *reg_data, uint16_t length) {
+	gpio_set(CS_GPIO_PORT, CS_GPIO_PIN, GPIO_PIN_RESET); // Activate CS
+	spi_transfer(SPI_MODULE, &reg_addr, 1, NULL, 0); // Write address
+	spi_transfer(SPI_MODULE, reg_data, length, NULL, 0); // Write data
+	gpio_set(CS_GPIO_PORT, CS_GPIO_PIN, GPIO_PIN_SET); // Deactivate CS
+	return 0;
+}
+
+int8_t spi_reg_read(uint8_t cs, uint8_t reg_addr, uint8_t *reg_data, uint16_t length) {
+	reg_addr = 0x80 | reg_addr; // Set read bit
+	gpio_set(CS_GPIO_PORT, CS_GPIO_PIN, GPIO_PIN_RESET); // Activate CS
+	spi_transfer(SPI_MODULE, &reg_addr, 1, NULL, 0); // Write address
+	spi_transfer(SPI_MODULE, NULL, 0, reg_data, length); // Read data
+	gpio_set(CS_GPIO_PORT, CS_GPIO_PIN, GPIO_PIN_SET); // Deactivate CS
+	return 0;
+}
+
+
+
+// Delay function
+void user_delay_ms(uint32_t period) {
+	// Implement a delay function suitable for your platform
+}
+
+
+void initialize_bme280() {
+	// Assign device structure parameters
+	bme280.dev_id = 0;
+	bme280.intf = BME280_SPI_INTF;
+	bme280.read = spi_reg_read;
+	bme280.write = spi_reg_write;
+	bme280.delay_ms = user_delay_ms;
+
+	// Initialize the BME280
+	bme280_init(&bme280);
+}
+
+
+void read_sensor_data() {
+	struct bme280_data comp_data;
+	
+	// Assuming the sensor is in normal mode and periodically updating sensor data
+	bme280_get_sensor_data(BME280_ALL, &comp_data, &bme280);
+
+	// Send the string over UART
+	io_write(&USART_0, comp_data,sizeof(comp_data));
+	// Print the sensor data (implement a suitable print function)
+	//print_sensor_data(&comp_data);
+}
+
 int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
+	
+	// Initialize SPI and GPIO (implement these functions according to your HAL)
+	spi_init(SPI_MODULE);
+	gpio_init(CS_GPIO_PORT, CS_GPIO_PIN);
+
+	// Initialize BME280
+	initialize_bme280();
+
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor(&SPI_0, &io);
+	spi_m_sync_enable(&SPI_0);
+
+	uint8_t read_data[12]; // Buffer to store the data that is read
+	
 	
 	 struct bme280_dev dev;
 	 struct bme280_data comp_data;
 
  // BME280 sensor initialization
  // Make sure to implement the user I2C or SPI read/write and delay functions
- bme280.dev_id = BME280_I2C_ADDR_PRIM; // Or BME280_I2C_ADDR_SEC
- bme280.intf = BME280_I2C_INTF;
- bme280.read = user_i2c_read; // Replace with actual I2C read function
- bme280.write = user_i2c_write; // Replace with actual I2C write function
- bme280.delay_ms = user_delay_ms; // Replace with actual delay function
+//  bme280.dev_id = BME280_I2C_ADDR_PRIM; // Or BME280_I2C_ADDR_SEC
+//  bme280.intf = BME280_I2C_INTF;
+//  bme280.read = user_i2c_read; // Replace with actual I2C read function
+//  bme280.write = user_i2c_write; // Replace with actual I2C write function
+//  bme280.delay_ms = user_delay_ms; // Replace with actual delay function
 
  bme280_init(&bme280);
 	
@@ -288,7 +363,7 @@ int main(void)
 	// Enable SPI
 	spi_m_sync_enable(&SPI_0);
 	
-	
+	// 
 	usart_async_register_callback(&USART_0, USART_ASYNC_TXC_CB, serial_tx_cb);
 	usart_async_register_callback(&USART_0, USART_ASYNC_RXC_CB, serial_rx_cb);
 	int32_t result = usart_async_enable(&USART_0);
@@ -302,6 +377,7 @@ int main(void)
 	}
 	
 
+
 	while (1) {
 		
 		// Example of reading sensor data
@@ -309,27 +385,24 @@ int main(void)
 		// 	uint32_t temperature, pressure, humidity;
 		// 	bme280_read_data(&temperature, &pressure, &humidity);
 		 //	Use the sensor data as needed
-		}
+		//}
 			
 		read_SPI_data();
 		
+		
 		     if (read_bme280_flag) {
-
+					read_sensor_data();
 
 			      
 
 			       // Read the sensor data
-			       int8_t rslt = bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
-			       if (rslt == BME280_OK) {
+				   //io_read(io, read_data, 12); // Read 12 bytes of data into read_data buffer
 				       // Format the sensor data into a string
-				       char sensor_data_string[64];
-				       sprintf(sensor_data_string,
-				       "Temp: %.2f C, Pressure: %.2f Pa, Humidity: %.2f %%\r\n",
-				       comp_data.temperature, comp_data.pressure, comp_data.humidity);
+				      
 
-				       // Send the string over UART
-				       io_write(&USART_0, sensor_data_string,sizeof(sensor_data_string));
-				       } 
+				      // Send the string over UART
+				    //io_write(&USART_0, read_data,sizeof(read_data));
+				    
 					   
 				   
 				    read_bme280_flag = false;
@@ -426,7 +499,11 @@ int main(void)
 			send_data_flag = 0;
 			
 		}
+			 }
 
 		
 	}
-}
+
+// Put a pulse in and see how fast that will go - HOW SHORT CAN WE MAKE THE PULSE - OSCILLOSCOPE HESSE
+// We need to measure the width of upper discriminator
+// idea: timer interrupt, every time it interrupts send an input signal with given width??

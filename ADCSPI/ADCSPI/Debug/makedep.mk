@@ -8,8 +8,6 @@ bme280.c
 
 buffer_queue.c
 
-bme280_sensor.c
-
 Device_Startup\startup_samv71q21b.c
 
 Device_Startup\system_samv71q21b.c
