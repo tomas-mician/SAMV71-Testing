@@ -30,6 +30,14 @@ static uint8_t USART_0_buffer[USART_0_BUFFER_SIZE];
 
 struct rand_sync_desc RAND_0;
 
+/*
+void GPIO_init(void) {
+	gpio_set_pin_direction(CS_PIN_DEVICE1, GPIO_DIRECTION_OUT);
+	gpio_set_pin_level(CS_PIN_DEVICE1, true); // Set the pin high (deactivate CS)
+	// Configure other necessary GPIO pins here
+}
+*/
+
 void SPI_0_PORT_init(void)
 {
 
@@ -142,4 +150,7 @@ void system_init(void)
 
 	RAND_0_init();
 	USART_0_init();
+	
+	// NEW
+	//GPIO_init();
 }

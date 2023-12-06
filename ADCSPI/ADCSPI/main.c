@@ -244,6 +244,7 @@ void serial_send_data() {
 struct bme280_dev bme280;
 
 // SPI read and write functions
+/*
 int8_t spi_reg_write(uint8_t cs, uint8_t reg_addr, uint8_t *reg_data, uint16_t length) {
 	gpio_set(CS_GPIO_PORT, CS_GPIO_PIN, GPIO_PIN_RESET); // Activate CS
 	spi_transfer(SPI_MODULE, &reg_addr, 1, NULL, 0); // Write address
@@ -260,6 +261,70 @@ int8_t spi_reg_read(uint8_t cs, uint8_t reg_addr, uint8_t *reg_data, uint16_t le
 	gpio_set(CS_GPIO_PORT, CS_GPIO_PIN, GPIO_PIN_SET); // Deactivate CS
 	return 0;
 }
+*/
+
+void spi_init(void) {
+	// Initialize SPI module
+	spi_m_sync_init(&SPI_0, SPI0);
+
+	// Set SPI baud rate, mode, etc. as needed
+	spi_m_sync_set_baudrate(&SPI_0, 1000000); // Example: 1 MHz
+	spi_m_sync_enable(&SPI_0);
+}
+
+
+void gpio_init(void) {
+	// Initialize CS_PIN_DEVICE1 as output and set it high
+	gpio_set_pin_direction(CS_PIN_DEVICE1, GPIO_DIRECTION_OUT);
+	gpio_set_pin_level(CS_PIN_DEVICE1, true);
+}
+
+
+int8_t spi_reg_write(uint8_t reg_addr, const uint8_t *reg_data, uint16_t length) {
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor(&SPI_0, &io);
+	spi_m_sync_enable(&SPI_0);
+
+	// Activate CS
+	gpio_set_pin_level(CS_PIN_DEVICE1, false);
+
+	// Write register address
+	io_write(io, &reg_addr, 1);
+
+	// Write data
+	io_write(io, reg_data, length);
+
+	// Deactivate CS
+	gpio_set_pin_level(CS_PIN_DEVICE1, true);
+
+	return 0; // Indicate success
+}
+
+
+
+int8_t spi_reg_read(uint8_t reg_addr, uint8_t *reg_data, uint16_t length) {
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor(&SPI_0, &io);
+	spi_m_sync_enable(&SPI_0);
+
+	reg_addr |= 0x80; // Set the MSB for read operation
+
+	// Activate CS
+	gpio_set_pin_level(CS_PIN_DEVICE1, false);
+
+	// Write register address
+	io_write(io, &reg_addr, 1);
+
+	// Read data
+	io_read(io, reg_data, length);
+
+	// Deactivate CS
+	gpio_set_pin_level(CS_PIN_DEVICE1, true);
+
+	return 0; // Indicate success
+}
+
+
 
 
 
@@ -284,14 +349,20 @@ void initialize_bme280() {
 
 void read_sensor_data() {
 	struct bme280_data comp_data;
-	
-	// Assuming the sensor is in normal mode and periodically updating sensor data
-	bme280_get_sensor_data(BME280_ALL, &comp_data, &bme280);
+	int8_t rslt = bme280_get_sensor_data(BME280_ALL, &comp_data, &bme280);
 
-	// Send the string over UART
-	io_write(&USART_0, comp_data,sizeof(comp_data));
-	// Print the sensor data (implement a suitable print function)
-	//print_sensor_data(&comp_data);
+	if (rslt == BME280_OK) {
+		// Format and send sensor data over UART
+		char buffer[128];
+		snprintf(buffer, sizeof(buffer), "Temperature: %0.2f C, Pressure: %0.2f hPa, Humidity: %0.2f%%\r\n",
+		comp_data.temperature, comp_data.pressure / 100.0, comp_data.humidity);
+		io_write(&USART_0.io, (uint8_t *)buffer, strlen(buffer));
+		} else {
+		// Handle error
+		// For example, send an error message over UART
+		char error_msg[] = "Error reading BME280 sensor data\r\n";
+		io_write(&USART_0.io, (uint8_t *)error_msg, strlen(error_msg));
+	}
 }
 
 int main(void)
@@ -301,7 +372,7 @@ int main(void)
 	
 	// Initialize SPI and GPIO (implement these functions according to your HAL)
 	spi_init(SPI_MODULE);
-	gpio_init(CS_GPIO_PORT, CS_GPIO_PIN);
+	gpio_init(CS_GPIO_PORT, CS_GPIO_PIN); // choose the pin and port
 
 	// Initialize BME280
 	initialize_bme280();
@@ -313,6 +384,7 @@ int main(void)
 	uint8_t read_data[12]; // Buffer to store the data that is read
 	
 	
+	// NOTE: we might not need this dev as the bme_280 struct was already globally initialized elsewhere in main.c
 	 struct bme280_dev dev;
 	 struct bme280_data comp_data;
 
@@ -390,7 +462,20 @@ int main(void)
 		
 		
 		     if (read_bme280_flag) {
-					read_sensor_data();
+					read_sensor_data(); // Should handle all the reading making the next code redundant
+					
+					/*
+					struct bme280_data comp_data;
+					int8_t rslt = bme280_get_sensor_data(BME280_HUM, &comp_data, &bme280);
+					if (rslt == BME280_OK) {
+						// Successfully read humidity data
+						// Process the humidity data as required
+						// Example: Sending over USART
+						char buffer[64];
+						snprintf(buffer, sizeof(buffer), "Humidity: %0.2f %%\r\n", comp_data.humidity);
+						io_write(&USART_0.io, (uint8_t*)buffer, strlen(buffer));
+					} 
+					*/
 
 			      
 
