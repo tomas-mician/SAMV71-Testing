@@ -48,7 +48,8 @@ uint16_t milliCounter = 0;
 uint32_t secondCounter = 0;
 uint16_t microCounter = 0;
 
-#define CS_PIN_DEVICE1 Humidity_CS // replace with your actual CS pins
+// #define CS_PIN_DEVICE1 GPIO(GPIO_PORTD, 25) // replace with your actual CS pins
+#define CS_PIN_DEVICE1 PIO_PD25_IDX
 #define CS_PIN_DEVICE2 PIO_PA29_IDX
 #define CS_PIN_DEVICE3 PIO_PA30_IDX
 #define CS_PIN_DEVICE4 PIO_PA31_IDX
@@ -268,7 +269,7 @@ void spi_init(void) {
 	spi_m_sync_init(&SPI_0, SPI0);
 
 	// Set SPI baud rate, mode, etc. as needed
-	spi_m_sync_set_baudrate(&SPI_0, 1000000); // Example: 1 MHz
+	spi_m_sync_set_baudrate(&SPI_0, 115200); // Example: 1 MHz. Changed to 115200 for now
 	spi_m_sync_enable(&SPI_0);
 }
 
@@ -336,11 +337,11 @@ void user_delay_ms(uint32_t period) {
 
 void initialize_bme280() {
 	// Assign device structure parameters
-	bme280.dev_id = 0;
+	//bme280.dev_id = 0;
 	bme280.intf = BME280_SPI_INTF;
 	bme280.read = spi_reg_read;
 	bme280.write = spi_reg_write;
-	bme280.delay_ms = user_delay_ms;
+	bme280.delay_us = user_delay_ms;
 
 	// Initialize the BME280
 	bme280_init(&bme280);
@@ -371,8 +372,8 @@ int main(void)
 	atmel_start_init();
 	
 	// Initialize SPI and GPIO (implement these functions according to your HAL)
-	spi_init(SPI_MODULE);
-	gpio_init(CS_GPIO_PORT, CS_GPIO_PIN); // choose the pin and port
+	spi_init(); //was SPI_MODULE
+	gpio_init(); // choose the pin and port
 
 	// Initialize BME280
 	initialize_bme280();
@@ -396,7 +397,7 @@ int main(void)
 //  bme280.write = user_i2c_write; // Replace with actual I2C write function
 //  bme280.delay_ms = user_delay_ms; // Replace with actual delay function
 
- bme280_init(&bme280);
+ //bme280_init(&bme280); [recent]
 	
 	// Set up Timer Function
 	task.interval = 1;

@@ -1758,7 +1758,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x64 examples/driver_examples.o
  .debug_macro   0x00000000       0xc9 examples/driver_examples.o
  .debug_line    0x00000000      0xe54 examples/driver_examples.o
- .debug_str     0x00000000   0x13b45e examples/driver_examples.o
+ .debug_str     0x00000000   0x13b476 examples/driver_examples.o
  .comment       0x00000000       0x5a examples/driver_examples.o
  .debug_frame   0x00000000       0x88 examples/driver_examples.o
  .ARM.attributes
@@ -2407,7 +2407,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 hal/src/hal_delay.o
  .debug_macro   0x00000000       0xca hal/src/hal_delay.o
  .debug_line    0x00000000      0xcac hal/src/hal_delay.o
- .debug_str     0x00000000   0x13a7eb hal/src/hal_delay.o
+ .debug_str     0x00000000   0x13a803 hal/src/hal_delay.o
  .comment       0x00000000       0x5a hal/src/hal_delay.o
  .debug_frame   0x00000000       0x68 hal/src/hal_delay.o
  .ARM.attributes
@@ -3058,7 +3058,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x1c hal/src/hal_gpio.o
  .debug_macro   0x00000000       0x16 hal/src/hal_gpio.o
  .debug_line    0x00000000      0xc7c hal/src/hal_gpio.o
- .debug_str     0x00000000   0x13a84b hal/src/hal_gpio.o
+ .debug_str     0x00000000   0x13a863 hal/src/hal_gpio.o
  .comment       0x00000000       0x5a hal/src/hal_gpio.o
  .debug_frame   0x00000000       0x20 hal/src/hal_gpio.o
  .ARM.attributes
@@ -3385,7 +3385,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 hal/src/hal_init.o
  .debug_macro   0x00000000       0xca hal/src/hal_init.o
  .debug_line    0x00000000      0xc4c hal/src/hal_init.o
- .debug_str     0x00000000   0x13a72c hal/src/hal_init.o
+ .debug_str     0x00000000   0x13a744 hal/src/hal_init.o
  .comment       0x00000000       0x5a hal/src/hal_init.o
  .debug_frame   0x00000000       0x20 hal/src/hal_init.o
  .ARM.attributes
@@ -4031,7 +4031,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 hal/src/hal_sleep.o
  .debug_macro   0x00000000       0xca hal/src/hal_sleep.o
  .debug_line    0x00000000      0xc64 hal/src/hal_sleep.o
- .debug_str     0x00000000   0x13a768 hal/src/hal_sleep.o
+ .debug_str     0x00000000   0x13a780 hal/src/hal_sleep.o
  .comment       0x00000000       0x5a hal/src/hal_sleep.o
  .debug_frame   0x00000000       0x38 hal/src/hal_sleep.o
  .ARM.attributes
@@ -5387,7 +5387,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 hal/utils/src/utils_event.o
  .debug_macro   0x00000000       0x35 hal/utils/src/utils_event.o
  .debug_line    0x00000000      0xda3 hal/utils/src/utils_event.o
- .debug_str     0x00000000   0x13daf8 hal/utils/src/utils_event.o
+ .debug_str     0x00000000   0x13db10 hal/utils/src/utils_event.o
  .comment       0x00000000       0x5a hal/utils/src/utils_event.o
  .debug_frame   0x00000000       0x70 hal/utils/src/utils_event.o
  .ARM.attributes
@@ -5729,7 +5729,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xca hal/utils/src/utils_list.o
  .debug_macro   0x00000000       0x16 hal/utils/src/utils_list.o
  .debug_line    0x00000000      0xce5 hal/utils/src/utils_list.o
- .debug_str     0x00000000   0x13a83b hal/utils/src/utils_list.o
+ .debug_str     0x00000000   0x13a853 hal/utils/src/utils_list.o
  .comment       0x00000000       0x5a hal/utils/src/utils_list.o
  .debug_frame   0x00000000       0x98 hal/utils/src/utils_list.o
  .ARM.attributes
@@ -6473,7 +6473,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xc9 hpl/core/hpl_core_m7_base.o
  .debug_macro   0x00000000       0x16 hpl/core/hpl_core_m7_base.o
  .debug_line    0x00000000      0xdf5 hpl/core/hpl_core_m7_base.o
- .debug_str     0x00000000   0x13b5d2 hpl/core/hpl_core_m7_base.o
+ .debug_str     0x00000000   0x13b5ea hpl/core/hpl_core_m7_base.o
  .comment       0x00000000       0x5a hpl/core/hpl_core_m7_base.o
  .debug_frame   0x00000000       0xec hpl/core/hpl_core_m7_base.o
  .ARM.attributes
@@ -7765,7 +7765,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 hpl/pmc/hpl_sleep.o
  .debug_macro   0x00000000       0xca hpl/pmc/hpl_sleep.o
  .debug_line    0x00000000      0xe93 hpl/pmc/hpl_sleep.o
- .debug_str     0x00000000   0x13ad63 hpl/pmc/hpl_sleep.o
+ .debug_str     0x00000000   0x13ad7b hpl/pmc/hpl_sleep.o
  .comment       0x00000000       0x5a hpl/pmc/hpl_sleep.o
  .debug_frame   0x00000000       0x44 hpl/pmc/hpl_sleep.o
  .ARM.attributes
@@ -8951,7 +8951,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x6cc hpl/xdmac/hpl_xdmac.o
  .debug_macro   0x00000000      0x6ba hpl/xdmac/hpl_xdmac.o
  .debug_line    0x00000000      0xcc8 hpl/xdmac/hpl_xdmac.o
- .debug_str     0x00000000   0x1427c9 hpl/xdmac/hpl_xdmac.o
+ .debug_str     0x00000000   0x1427e1 hpl/xdmac/hpl_xdmac.o
  .comment       0x00000000       0x5a hpl/xdmac/hpl_xdmac.o
  .ARM.attributes
                 0x00000000       0x37 hpl/xdmac/hpl_xdmac.o
@@ -10417,41 +10417,41 @@ OUTPUT(adc_control1.elf elf32-littlearm)
  .debug_line    0x0000c08b     0x1767 hpl/spi/hpl_spi.o
  .debug_line    0x0000d7f2     0x13f5 hpl/usart/hpl_usart.o
 
-.debug_str      0x00000000   0x1497b6
- .debug_str     0x00000000   0x13a8f2 atmel_start.o
-                             0x13b2e4 (size before relaxing)
- .debug_str     0x0013a8f2      0x78d Device_Startup/startup_samv71q21b.o
+.debug_str      0x00000000   0x149812
+ .debug_str     0x00000000   0x13a90a atmel_start.o
+                             0x13b2fc (size before relaxing)
+ .debug_str     0x0013a90a      0x7d1 Device_Startup/startup_samv71q21b.o
                              0x1353c9 (size before relaxing)
- .debug_str     0x0013b07f      0xd25 driver_init.o
-                             0x13c06b (size before relaxing)
- .debug_str     0x0013bda4     0x40d6 edbg_uart_example.o
-                             0x13f7fc (size before relaxing)
- .debug_str     0x0013fe7a       0x9c hal/src/hal_atomic.o
-                             0x13a781 (size before relaxing)
- .debug_str     0x0013ff16       0xc1 hal/src/hal_ext_irq.o
-                             0x13a83a (size before relaxing)
- .debug_str     0x0013ffd7       0x2a hal/src/hal_io.o
-                             0x13a81c (size before relaxing)
- .debug_str     0x00140001      0x2ba hal/src/hal_spi_m_sync.o
-                             0x13b109 (size before relaxing)
- .debug_str     0x001402bb      0x644 hal/src/hal_usart_async.o
-                             0x13b686 (size before relaxing)
- .debug_str     0x001408ff       0x2a hal/utils/src/utils_assert.o
-                             0x13a791 (size before relaxing)
- .debug_str     0x00140929       0x24 hal/utils/src/utils_ringbuffer.o
-                             0x13a825 (size before relaxing)
- .debug_str     0x0014094d      0x773 hal/utils/src/utils_syscalls.o
-                               0x73b0 (size before relaxing)
- .debug_str     0x001410c0     0x3091 hpl/core/hpl_init.o
-                             0x13dbe3 (size before relaxing)
- .debug_str     0x00144151     0x3232 hpl/pio/hpl_pio_ext.o
-                             0x13e212 (size before relaxing)
- .debug_str     0x00147383      0x1d6 hpl/pmc/hpl_pmc.o
-                             0x13b813 (size before relaxing)
- .debug_str     0x00147559     0x1013 hpl/spi/hpl_spi.o
-                             0x13c625 (size before relaxing)
- .debug_str     0x0014856c     0x124a hpl/usart/hpl_usart.o
-                             0x13caca (size before relaxing)
+ .debug_str     0x0013b0db      0xd25 driver_init.o
+                             0x13c083 (size before relaxing)
+ .debug_str     0x0013be00     0x40d6 edbg_uart_example.o
+                             0x13f814 (size before relaxing)
+ .debug_str     0x0013fed6       0x9c hal/src/hal_atomic.o
+                             0x13a799 (size before relaxing)
+ .debug_str     0x0013ff72       0xc1 hal/src/hal_ext_irq.o
+                             0x13a852 (size before relaxing)
+ .debug_str     0x00140033       0x2a hal/src/hal_io.o
+                             0x13a834 (size before relaxing)
+ .debug_str     0x0014005d      0x2ba hal/src/hal_spi_m_sync.o
+                             0x13b121 (size before relaxing)
+ .debug_str     0x00140317      0x644 hal/src/hal_usart_async.o
+                             0x13b69e (size before relaxing)
+ .debug_str     0x0014095b       0x2a hal/utils/src/utils_assert.o
+                             0x13a7a9 (size before relaxing)
+ .debug_str     0x00140985       0x24 hal/utils/src/utils_ringbuffer.o
+                             0x13a83d (size before relaxing)
+ .debug_str     0x001409a9      0x773 hal/utils/src/utils_syscalls.o
+                               0x73c8 (size before relaxing)
+ .debug_str     0x0014111c     0x3091 hpl/core/hpl_init.o
+                             0x13dbfb (size before relaxing)
+ .debug_str     0x001441ad     0x3232 hpl/pio/hpl_pio_ext.o
+                             0x13e22a (size before relaxing)
+ .debug_str     0x001473df      0x1d6 hpl/pmc/hpl_pmc.o
+                             0x13b82b (size before relaxing)
+ .debug_str     0x001475b5     0x1013 hpl/spi/hpl_spi.o
+                             0x13c63d (size before relaxing)
+ .debug_str     0x001485c8     0x124a hpl/usart/hpl_usart.o
+                             0x13cae2 (size before relaxing)
 
 .debug_frame    0x00000000     0x2028
  .debug_frame   0x00000000       0x28 atmel_start.o

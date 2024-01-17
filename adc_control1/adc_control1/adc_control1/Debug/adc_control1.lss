@@ -31,9 +31,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_line   0000ebe7  00000000  00000000  0007ac7e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    001497b6  00000000  00000000  00089865  2**0
+ 14 .debug_str    00149812  00000000  00000000  00089865  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  00002028  00000000  00000000  001d301c  2**2
+ 15 .debug_frame  00002028  00000000  00000000  001d3078  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -125,19 +125,11 @@ void atmel_start_init(void)
   4001dc:	004003b5 	.word	0x004003b5
 
 004001e0 <Dummy_Handler>:
-
-/**
- * \brief Default interrupt handler for unused IRQs.
- */
-void Dummy_Handler(void)
-{
   4001e0:	e7fe      	b.n	4001e0 <Dummy_Handler>
 	...
 
 004001e4 <Reset_Handler>:
-{
   4001e4:	b508      	push	{r3, lr}
-        if (pSrc != pDest) {
   4001e6:	4b10      	ldr	r3, [pc, #64]	; (400228 <Reset_Handler+0x44>)
   4001e8:	4a10      	ldr	r2, [pc, #64]	; (40022c <Reset_Handler+0x48>)
   4001ea:	429a      	cmp	r2, r3
@@ -145,35 +137,27 @@ void Dummy_Handler(void)
   4001ee:	4b0e      	ldr	r3, [pc, #56]	; (400228 <Reset_Handler+0x44>)
   4001f0:	4a0e      	ldr	r2, [pc, #56]	; (40022c <Reset_Handler+0x48>)
   4001f2:	e003      	b.n	4001fc <Reset_Handler+0x18>
-                        *pDest++ = *pSrc++;
   4001f4:	6811      	ldr	r1, [r2, #0]
   4001f6:	6019      	str	r1, [r3, #0]
   4001f8:	3304      	adds	r3, #4
   4001fa:	3204      	adds	r2, #4
-                for (; pDest < &_erelocate;) {
   4001fc:	490c      	ldr	r1, [pc, #48]	; (400230 <Reset_Handler+0x4c>)
   4001fe:	428b      	cmp	r3, r1
   400200:	d3f8      	bcc.n	4001f4 <Reset_Handler+0x10>
-                        *pDest++ = *pSrc++;
   400202:	4b0c      	ldr	r3, [pc, #48]	; (400234 <Reset_Handler+0x50>)
   400204:	e002      	b.n	40020c <Reset_Handler+0x28>
-                *pDest++ = 0;
   400206:	2200      	movs	r2, #0
   400208:	601a      	str	r2, [r3, #0]
   40020a:	3304      	adds	r3, #4
-        for (pDest = &_szero; pDest < &_ezero;) {
   40020c:	4a0a      	ldr	r2, [pc, #40]	; (400238 <Reset_Handler+0x54>)
   40020e:	4293      	cmp	r3, r2
   400210:	d3f9      	bcc.n	400206 <Reset_Handler+0x22>
-        SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
   400212:	4a0a      	ldr	r2, [pc, #40]	; (40023c <Reset_Handler+0x58>)
   400214:	4b0a      	ldr	r3, [pc, #40]	; (400240 <Reset_Handler+0x5c>)
   400216:	f023 037f 	bic.w	r3, r3, #127	; 0x7f
   40021a:	6093      	str	r3, [r2, #8]
-        __libc_init_array();
   40021c:	4b09      	ldr	r3, [pc, #36]	; (400244 <Reset_Handler+0x60>)
   40021e:	4798      	blx	r3
-        main();
   400220:	4b09      	ldr	r3, [pc, #36]	; (400248 <Reset_Handler+0x64>)
   400222:	4798      	blx	r3
   400224:	e7fe      	b.n	400224 <Reset_Handler+0x40>
