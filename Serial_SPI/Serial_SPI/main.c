@@ -5,6 +5,95 @@
 // Include your microcontroller's SPI and GPIO headers here
 
 
+
+
+// TIMER SHENANIGANS
+typedef void (*timer_task_callback_t)(const struct timer_task *const timer_task);
+struct timer_task {
+	timer_task_callback_t callback;
+	uint32_t interval; // Interval for the task in milliseconds
+	uint8_t mode;      // Operation mode, e.g., repeat
+	// You can add more fields as needed
+};
+#include <stdint.h> // For fixed-width integers
+#include <stdbool.h> // For the `bool` type
+#include <string.h> // For memcpy
+// Assuming these are defined or included from your timer library
+extern void timer_init(void);
+extern void timer_add_task(struct timer_task* task);
+extern void timer_start(void);
+static struct timer_task task, micro_task;
+volatile bool send_data_flag = false, read_bme280_flag = false;
+uint16_t messageCounter = 0, milliCounter = 0, microCounter = 0;
+uint32_t secondCounter = 0;
+const uint16_t message_interval_ms = 100;
+// Timer task callbacks
+static void timer_task_cb(const struct timer_task *const timer_task);
+static void micro_timer_task_cb(const struct timer_task *const timer_task);
+void setup_timers(void) {
+	// Initialize the timer module
+	timer_init();
+	// Setup millisecond timer task
+	task.callback = timer_task_cb;
+	task.interval = 1; // 1 millisecond interval
+	task.mode = TIMER_TASK_REPEAT; // Repeat the task
+	// Add tasks to the timer
+	timer_add_task(&task);
+	timer_add_task(&micro_task);
+	// Start the timer
+	timer_start();
+}
+// Timer Callback Implementation
+static void timer_task_cb(const struct timer_task *const timer_task) {
+	milliCounter++;
+	messageCounter++;
+	// Check if it's time to send a message
+	if (messageCounter >= message_interval_ms) {
+		// Send serial message or set flag to indicate data should be sent
+		send_data_flag = true;
+		write_flag = true; // Set the flag to enable writing
+		io_write("Timer tick.\n"); // Write a message to the buffer
+		write_flag = false; // Reset the flag after writing
+		messageCounter = 0; // Reset message counter
+	}
+	// Reset millisecond counter every second
+	if (milliCounter >= 1000) {
+		milliCounter = 0;
+		secondCounter++;
+		read_bme280_flag = true; // Set flag to read BME280 sensor data
+	}
+}
+// serialization
+#define BUFFER_SIZE 1024
+static char serial_buffer[BUFFER_SIZE];
+static int buffer_index = 0;
+static bool write_flag = false;
+void io_write(const char* data) {
+	if (write_flag && (buffer_index < (BUFFER_SIZE - strlen(data)))) {
+		memcpy(&serial_buffer[buffer_index], data, strlen(data));
+		buffer_index += strlen(data);
+		serial_buffer[buffer_index] = '\0'; // Ensure null-termination
+	}
+}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 struct bme280_dev dev;
 dev.intf = BME280_SPI_INTF;
 dev.read = user_spi_read;
@@ -13,6 +102,16 @@ dev.delay_us = user_delay_us;
 dev.intf_ptr = &Humidity_CS; // Use if you need to pass the CS pin or SPI handler
 
 int main(void) {
+	
+	// Initialize MCU, drivers, and middleware
+	// This would typically initialize system clocks, peripherals, and any middleware needed
+	atmel_start_init();
+	// Setup and start timer tasks
+	setup_timers();
+	// Main loop
+	
+	
+	
 	struct bme280_dev dev;
 	int8_t rslt = BME280_OK;
 
@@ -54,6 +153,24 @@ int main(void) {
 	// Read sensor data
 	struct bme280_data comp_data;
 	while (1) {
+		
+		// Check if the buffer contains serialized data
+		if (serial_buffer[0] != '\0') {
+			// Print the buffer's content to verify the timer task is working
+			printf("Buffer content: %s", serial_buffer);
+			// Clear the buffer after printing its contents
+			memset(serial_buffer, 0, BUFFER_SIZE);
+			buffer_index = 0; // Reset the buffer index for new data
+		}
+		// Implement a small delay to prevent overwhelming the output
+		// This delay mechanism will depend on your platform
+		// For a simple simulation, you might use a busy wait or a platform-specific sleep function
+		// Example: platform_specific_delay_function(100); // Delay for 100ms or similar
+		
+		
+		
+		
+		
 		// Delay to meet the standby time
 		dev.delay_us(70000, NULL); // Adjust based on your configuration
 
@@ -78,6 +195,7 @@ BME280_INTF_RET_TYPE user_spi_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t
 	// Set CS low
 	// Send reg_addr with read bit
 	// Read len bytes of data into reg_data
+	sdsa
 	// Set CS high
 	return 0; // Return 0 for success
 }
