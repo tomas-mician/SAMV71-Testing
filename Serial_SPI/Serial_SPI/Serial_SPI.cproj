@@ -30,15 +30,15 @@
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.52.0" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.52.0" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
     <Compiler>gcc</Compiler>
     <configurator>AtmelStart</configurator>
@@ -361,6 +361,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="atmel_start_pins.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="bme280.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="bme280.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="bme280_defs.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Config\hpl_pmc_config.h">
