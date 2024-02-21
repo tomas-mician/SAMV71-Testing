@@ -1,6 +1,6 @@
 #include <atmel_start.h>
 
-
+#include <avr/interrupt.h>
 #include "bme280.h"
 // Include your microcontroller's SPI and GPIO headers here
 
@@ -111,6 +111,10 @@ int main(void) {
 	// Main loop
 	
 	
+	sei()
+	
+	
+
 	
 	struct bme280_dev dev;
 	int8_t rslt = BME280_OK;
@@ -193,22 +197,59 @@ int main(void) {
 
 BME280_INTF_RET_TYPE user_spi_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, void *intf_ptr) {
 	// Set CS low
+	cs_select()
 	// Send reg_addr with read bit
 	// Read len bytes of data into reg_data
-	sdsa
+	
 	// Set CS high
+	cs_deselect()
 	return 0; // Return 0 for success
 }
 
 BME280_INTF_RET_TYPE user_spi_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t len, void *intf_ptr) {
 	// Set CS low
+	cs_select()
 	// Send reg_addr with write bit
 	// Write len bytes of data from reg_data
 	// Set CS high
+	cs_deselect()
 	return 0; // Return 0 for success
 }
 
 void user_delay_us(uint32_t period, void *intf_ptr) {
 	// Implement your delay function here, delay for 'period' microseconds
+}
+
+
+
+// Example functions for setting the CS pin state
+void cs_select() {
+	// Sets the Humidity_CS pin low
+	gpio_set_pin_level(Humidity_CS,false)
+	
+}
+
+void cs_deselect() {
+	// Sets the Humidity_CS pin high
+	gpio_set_pin_level(Humidity_CS, true);
+}
+
+
+void SPI_write(uint8_t buffer) {
+		struct io_descriptor *io;
+		spi_m_sync_get_io_descriptor(&SPI_0, &io);
+
+		spi_m_sync_enable(&SPI_0);
+		io_write(io, buffer, sizeof(buffer));
+	};
+	
+uint8_t SPI_read_byte() {
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor(&SPI_0, &io);
+
+	spi_m_sync_enable(&SPI_0);
+	uint8_t buffer[1];
+	io_read(io, buffer,1);
+	return buffer
 }
 
