@@ -24,3 +24,4 @@
 [1114/130846:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
 [1114/130846:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
 [1114/181310:ERROR:ipc_channel_win.cc(475)] pipe error: 109
+[0226/134347:WARNING:raw_channel_win.cc(532)] WriteFile: The pipe is being closed. (0xE8)
