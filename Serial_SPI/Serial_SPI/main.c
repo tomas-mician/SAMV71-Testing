@@ -94,14 +94,13 @@ void io_write(const char* data) {
 
 
 
-struct bme280_dev dev;
-dev.intf = BME280_SPI_INTF;
-dev.read = user_spi_read;
-dev.write = user_spi_write;
-dev.delay_us = user_delay_us;
-dev.intf_ptr = &Humidity_CS; // Use if you need to pass the CS pin or SPI handler
+
 
 int main(void) {
+	
+	struct bme280_dev dev;
+	
+	dev.intf_ptr = &Humidity_CS; // Use if you need to pass the CS pin or SPI handler
 	
 	// Initialize MCU, drivers, and middleware
 	// This would typically initialize system clocks, peripherals, and any middleware needed
@@ -111,7 +110,7 @@ int main(void) {
 	// Main loop
 	
 	
-	sei()
+	//sei();
 	
 	
 
@@ -197,22 +196,40 @@ int main(void) {
 
 BME280_INTF_RET_TYPE user_spi_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, void *intf_ptr) {
 	// Set CS low
-	cs_select()
+	cs_select();
 	// Send reg_addr with read bit
+	reg_addr = reg_addr | 0x80; // Assuming the MSB is the read bit
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor((struct spi_m_sync_descriptor *)intf_ptr, &io);
+	spi_m_sync_enable((struct spi_m_sync_descriptor *)intf_ptr);
+
+	// Send reg_addr with read bit
+	io_write(io, &reg_addr, 1);
+	
 	// Read len bytes of data into reg_data
+	io_read(io, reg_data, len);
 	
 	// Set CS high
-	cs_deselect()
+	cs_deselect();
 	return 0; // Return 0 for success
 }
 
 BME280_INTF_RET_TYPE user_spi_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t len, void *intf_ptr) {
-	// Set CS low
-	cs_select()
+	cs_select(); // Set CS low
+	
+	// Clear the read bit for write operation
+	reg_addr = reg_addr & 0x7F; // Assuming the MSB needs to be cleared for write
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor((struct spi_m_sync_descriptor *)intf_ptr, &io);
+	spi_m_sync_enable((struct spi_m_sync_descriptor *)intf_ptr);
+
 	// Send reg_addr with write bit
+	io_write(io, &reg_addr, 1);
+	
 	// Write len bytes of data from reg_data
-	// Set CS high
-	cs_deselect()
+	io_write(io, reg_data, len);
+	
+	cs_deselect(); // Set CS high
 	return 0; // Return 0 for success
 }
 
@@ -235,21 +252,21 @@ void cs_deselect() {
 }
 
 
-void SPI_write(uint8_t buffer) {
-		struct io_descriptor *io;
-		spi_m_sync_get_io_descriptor(&SPI_0, &io);
+void SPI_write(uint8_t *buffer, size_t length) {
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor(&SPI_0, &io);
+	spi_m_sync_enable(&SPI_0);
+	io_write(io, buffer, length); // Correctly pass the buffer and its length
+}
 
-		spi_m_sync_enable(&SPI_0);
-		io_write(io, buffer, sizeof(buffer));
-	};
 	
 uint8_t SPI_read_byte() {
 	struct io_descriptor *io;
-	spi_m_sync_get_io_descriptor(&SPI_0, &io);
+    spi_m_sync_get_io_descriptor(&SPI_0, &io);
 
-	spi_m_sync_enable(&SPI_0);
-	uint8_t buffer[1];
-	io_read(io, buffer,1);
-	return buffer
+    spi_m_sync_enable(&SPI_0);
+    uint8_t buffer[1] = {0}; // Initialize buffer
+    io_read(io, buffer, 1);
+    return buffer[0]; // Return the read byte
 }
 

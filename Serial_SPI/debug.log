@@ -1,0 +1,7 @@
+[0226/133828:ERROR:ipc_channel_win.cc(512)] pipe error: 232
+[0226/133828:WARNING:raw_channel_win.cc(532)] WriteFile: The pipe is being closed. (0xE8)
+[0226/133828:ERROR:ipc_channel_win.cc(512)] pipe error: 232
+[0226/133828:WARNING:channel.cc(359)] RawChannel write error
+[0226/134309:WARNING:raw_channel_win.cc(532)] WriteFile: The pipe is being closed. (0xE8)
+[0226/150520:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0226/150523:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
